@@ -11,5 +11,7 @@
     "password_uppercase_req": "A senha deve ter no mínimo uma letra maiúscula",
     "password_number_req": "A senha deve ter no mínimo um número",
     "password_specialcaracter_req": "A senha deve ter no mínimo um caracter especial",
-    "invalid_email" : "Verifique o e-mail"
+    "invalid_email" : "Verifique o e-mail",
+    "password_required" : "A senha é obrigatória!"
+
 }
