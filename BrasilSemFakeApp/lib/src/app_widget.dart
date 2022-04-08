@@ -1,3 +1,4 @@
+import 'package:basearch/src/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,6 +15,9 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       scrollBehavior: AppScrollBehavior(),
       title: 'app_name'.i18n(),
+      themeMode: ThemeMode.system,
+      darkTheme: GetTheme.darkTheme,
+      theme: GetTheme.lightTheme,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -34,7 +38,7 @@ class AppWidget extends StatelessWidget {
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }
