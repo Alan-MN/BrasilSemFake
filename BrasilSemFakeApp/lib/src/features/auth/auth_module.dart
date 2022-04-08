@@ -1,3 +1,4 @@
+import 'package:basearch/src/features/auth/presentation/view/page/forgot_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/get_start_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/register_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,15 +12,16 @@ import 'presentation/viewmodel/login_viewmodel.dart';
 class AuthModule extends Module {
   @override
   List<Bind<Object>> get binds => [
-    Bind.factory((i) => LoginViewModel()),
-    Bind.factory((i) => LoginUseCase()),
-    Bind.factory<ILogin>((i) => LoginRepository()),
-  ];
+        Bind.factory((i) => LoginViewModel()),
+        Bind.factory((i) => LoginUseCase()),
+        Bind.factory<ILogin>((i) => LoginRepository()),
+      ];
 
   @override
   List<ModularRoute> get routes => [
-    ChildRoute('/', child: (_, __) => const HeroPage(), children: []),
-    ChildRoute('/get-started', child: (_, __) => const GetStartPage()),
-    ChildRoute('/register', child: (_, __) => const RegisterPage())
-  ];
+        ChildRoute('/', child: (_, __) => const HeroPage(), children: []),
+        ChildRoute('/get-started', child: (_, __) => const GetStartPage()),
+        ChildRoute('/register', child: (_, __) => const RegisterPage()),
+        ChildRoute('/forgot', child: (_, __) => ForgotPasswordPage()),
+      ];
 }

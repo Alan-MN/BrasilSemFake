@@ -3,5 +3,8 @@
   "hero_page_subtitle": "Descubra se uma notícia realmente é verdadeira ou se ela é apenas uma fakenews. Também contribua com a filtragem de noticias",
   "login": "ENTRAR",
   "register": "CADASTRE-SE",
-  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd"
+  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd",
+  //forgot
+  "forgot" : "Esqueceu a senha?",
+  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
 }

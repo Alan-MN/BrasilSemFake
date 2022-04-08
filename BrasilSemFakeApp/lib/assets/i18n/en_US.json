@@ -3,5 +3,7 @@
   "hero_page_subtitle": "Find out if a news is really true or if it is just a fake news. Also contribute with the app filtering news that you know about",
   "login": "LOGIN",
   "register": "GET STARTED",
-  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd"
+  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd",
+  "forgot" : "Forgot password?",
+  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
 }
