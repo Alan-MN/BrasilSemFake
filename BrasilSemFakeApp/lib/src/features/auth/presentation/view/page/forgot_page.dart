@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 
+//cores ainda não padronizadas.
+//estruturação
 class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
