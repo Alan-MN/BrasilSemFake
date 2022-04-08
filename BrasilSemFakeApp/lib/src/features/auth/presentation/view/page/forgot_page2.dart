@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:basearch/src/theme.dart';
 
 class ForgotPasswordPage2 extends StatefulWidget {
   const ForgotPasswordPage2({Key? key}) : super(key: key);
@@ -10,18 +12,31 @@ class ForgotPasswordPage2 extends StatefulWidget {
 }
 
 class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
+  Widget get _backHome => Container(
+      // margin: const EdgeInsets.only(right: 5),
+
+      );
   Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22),
+        margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset('lib/assets/images/logo.svg',
-                semanticsLabel: 'Logo image', height: 36),
-            Container(
-              margin: const EdgeInsets.only(left: 5),
-              child: Text("app_name".i18n(),
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w700)),
+            IconButton(
+                onPressed: () {
+                  Modular.to.navigate('/get-started');
+                },
+                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
+            Row(
+              children: [
+                SvgPicture.asset('lib/assets/images/logo.svg',
+                    semanticsLabel: 'Logo image', height: 36),
+                Container(
+                  margin: const EdgeInsets.only(left: 5),
+                  child: Text("app_name".i18n(),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w700)),
+                )
+              ],
             )
           ],
         ),
@@ -46,6 +61,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           ],
         ),
       );
+
   Widget get _forgot => Container(
         padding: const EdgeInsets.only(
           top: 40,
@@ -56,6 +72,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           textAlign: TextAlign.left,
         ),
       );
+
   Widget get _forgotText => Container(
         padding: const EdgeInsets.only(
           top: 40,
@@ -67,6 +84,33 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           textAlign: TextAlign.left,
         ),
       );
+
+  Widget get _mailBox => Container(
+        padding: const EdgeInsets.only(
+          top: 40,
+          left: 20,
+          right: 70,
+        ),
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+              labelText: 'E-mail',
+              labelStyle: Theme.of(context).textTheme.subtitle1),
+          textAlign: TextAlign.center,
+        ),
+      );
+
+  Widget get _bottom => Container(
+        height: 60,
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          // Theme.of(context).bottomAppBarColor;
+          onPressed: () {},
+          child: Text(
+            'SUBMIT',
+          ),
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +119,8 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         _photoContainer,
         _forgot,
         _forgotText,
+        _mailBox,
+        _bottom,
       ]),
     );
   }
