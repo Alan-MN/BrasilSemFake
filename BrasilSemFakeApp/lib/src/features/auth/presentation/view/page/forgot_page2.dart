@@ -12,10 +12,6 @@ class ForgotPasswordPage2 extends StatefulWidget {
 }
 
 class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
-  Widget get _backHome => Container(
-      // margin: const EdgeInsets.only(right: 5),
-
-      );
   Widget get _headerContainer => Container(
         margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
         child: Row(
@@ -95,6 +91,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
               labelText: 'E-mail',
+              border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
           textAlign: TextAlign.center,
         ),
@@ -104,13 +101,15 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         height: 60,
         alignment: Alignment.center,
         child: ElevatedButton(
-          // Theme.of(context).bottomAppBarColor;
-          onPressed: () {},
+          onPressed: () {
+            Modular.to.navigate('/otpassword');
+          },
           child: Text(
             'SUBMIT',
           ),
         ),
       );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

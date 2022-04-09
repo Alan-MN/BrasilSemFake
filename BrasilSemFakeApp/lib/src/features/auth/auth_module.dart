@@ -1,6 +1,8 @@
 import 'package:basearch/src/features/auth/presentation/view/page/forgot_page2.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/get_start_page.dart';
+import 'package:basearch/src/features/auth/presentation/view/page/otpassword_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/register_page.dart';
+import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'data/repository/login_repository.dart';
@@ -23,5 +25,7 @@ class AuthModule extends Module {
         ChildRoute('/get-started', child: (_, __) => const GetStartPage()),
         ChildRoute('/register', child: (_, __) => const RegisterPage()),
         ChildRoute('/forgot', child: (_, __) => const ForgotPasswordPage2()),
+        ChildRoute('/Onboarding', child: (_, __) => OnboardingPage()),
+        ChildRoute('/otpassword', child: (_, __) => const OtpasswordPage()),
       ];
 }
