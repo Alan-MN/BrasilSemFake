@@ -27,6 +27,9 @@
   "buttonOnboarding":"skip",
   "buttonOnboardingLastPage":"continue",
   "enterCodeTitle": "Enter Code",
-  "enterCodeDiscription": "Enter the recovery code we sent to your e-mail"
+  "enterCodeDiscription": "Enter the recovery code we sent to your e-mail",
+  "create_text" : "Enter your name, e-mail address, a password containing at least 8 characters, with a capital letter and a special character and your date of birth",
+  "create_account" : "CREATE A ACCOUNT",
+  "term_of_use" : "I agree to the Term of Use and Privacy Policy"
   
 }

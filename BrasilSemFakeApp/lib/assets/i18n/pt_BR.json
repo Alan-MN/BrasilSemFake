@@ -28,5 +28,8 @@
   "buttonOnboarding":"pular",  
   "buttonOnboardingLastPage":"continuar",
   "enterCodeTitle": "Digite o código",
-  "enterCodeDiscription": "Digite o código de recuperação que enviamos para seu e-mail"
+  "enterCodeDiscription": "Digite o código de recuperação que enviamos para seu e-mail",
+  "create_text" : "Informe seu nome, e-mail, uma senha contendo pelomenos 8 caracteres, com uma letra Maiuscula e um caracter especial e sua data de nascimento",
+  "create_account" : "CRIE UMA CONTA",
+  "term_of_use" : "Eu concordo com os Termos de Serviço e a Politica de Privacidade"
 }
