@@ -101,7 +101,9 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         height: 60,
         alignment: Alignment.center,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Modular.to.navigate('/otpassword');
+          },
           child: Text(
             'SUBMIT',
           ),

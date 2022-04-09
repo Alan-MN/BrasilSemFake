@@ -25,6 +25,8 @@
   "titlePage3Onboarding":"Almost there",
   "discriptionPage3Onboarding": "All that you have to do now is Sign in and test your news.",
   "buttonOnboarding":"skip",
-  "buttonOnboardingLastPage":"continue"
+  "buttonOnboardingLastPage":"continue",
+  "enterCodeTitle": "Enter Code",
+  "enterCodeDiscription": "Enter the recovery code we sent to your e-mail"
   
 }
