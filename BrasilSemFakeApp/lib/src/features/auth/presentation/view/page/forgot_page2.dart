@@ -111,6 +111,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           ),
         ),
       );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

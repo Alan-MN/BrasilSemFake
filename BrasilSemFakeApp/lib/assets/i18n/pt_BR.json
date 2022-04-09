@@ -1,10 +1,24 @@
 {
   "app_name": "Brasil Sem Fake",
+  "username" : "Nome de usuário",
+  "username_hit" : "Informe o nome de usuário",
+  "username_ob" : "O nome de usuário é obrigatório!",
+  "password" : "senha",
+  "password_hit" : "Informe a senha",
+  "password_ob" : "A senha é obrigatória!",
+  "password_min_size" : "A senha dever ter no mínimo 8 caracteres",
+  "password_lowercase_req": "A senha deve ter no mínimo uma letra minúscula",
+  "password_uppercase_req": "A senha deve ter no mínimo uma letra maiúscula",
+  "password_number_req": "A senha deve ter no mínimo um número",
+  "password_specialcaracter_req": "A senha deve ter no mínimo um caracter especial",
+  "invalid_email" : "Verifique o e-mail",
+  "password_required" : "A senha é obrigatória!",
   "hero_page_subtitle": "Descubra se uma notícia realmente é verdadeira ou se ela é apenas uma fakenews. Também contribua com a filtragem de noticias",
   "login": "ENTRAR",
   "register": "CADASTRE-SE",
   "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd",
-  //forgot
+  "create_account": "Criar uma conta",
   "forgot" : "Esqueceu a senha?",
-  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
+  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus.",
+  "create_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
 }
