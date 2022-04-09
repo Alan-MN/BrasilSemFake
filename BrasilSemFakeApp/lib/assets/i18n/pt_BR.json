@@ -1,10 +1,17 @@
 {
   "app_name": "Brasil Sem Fake",
-  "hero_page_subtitle": "Descubra se uma notícia realmente é verdadeira ou se ela é apenas uma fakenews. Também contribua com a filtragem de noticias",
+  "hero_page_subtitle": "Descubra se uma notícia realmente é verdadeira ou se ela é apenas uma fakenews. Também contribua com a filtragem de noticias.",
   "login": "ENTRAR",
   "register": "CADASTRE-SE",
-  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd",
-  //forgot
+  "create_account_motivation": "Crie sua conta para continuar usando o aplicativo",
   "forgot" : "Esqueceu a senha?",
-  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
+  "forgot_text" : "Insira o email para redefinir a senha.",
+  "titlePage1Onboarding":"Bem vindo!" ,
+  "discriptionPage1Onboarding": "Use nosso app para descobrir a veracidade de uma notícia." ,
+  "titlePage2Onboarding":"Como funciona:",
+  "discriptionPage2Onboarding": "Pelo uso da IA que desenvolvemos, é possível tentar prever a veracidade de uma notícia.",
+  "titlePage3Onboarding":"Quase lá.",
+  "discriptionPage3Onboarding": "Agora só falta você fazer Sign in e começar a verificar suas noticias.",
+  "buttonOnboarding":"pular",  
+  "buttonOnboardingLastPage":"continuar"
 }

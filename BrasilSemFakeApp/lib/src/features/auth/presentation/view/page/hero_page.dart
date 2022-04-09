@@ -44,7 +44,7 @@ class _HeroPageState extends State<HeroPage> {
             icon: const Icon(Icons.arrow_forward_rounded),
             color: Colors.white,
             onPressed: () {
-              Modular.to.navigate('/get-started');
+              Modular.to.navigate('/Onboarding');
             },
           ),
         ),

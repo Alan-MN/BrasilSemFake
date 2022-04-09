@@ -3,7 +3,16 @@
   "hero_page_subtitle": "Find out if a news is really true or if it is just a fake news. Also contribute with the app filtering news that you know about",
   "login": "LOGIN",
   "register": "GET STARTED",
-  "create_account_motivation": "asdasdasdsadsadsadasdasddsafsdfcxvdfsgasffrqtqrfsdaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafsdfsdafasdfdgdsfgsDFDSAFHTRHERAFSFAGaaaaaaaaaaaaaaaaaaaaaafnwryhrtygfdgfgjfjtyteyrtywgfd",
+  "create_account_motivation": "Create your account to use the app",
   "forgot" : "Forgot password?",
-  "forgot_text" : "Duis magna tortor, bibendum lobortis eleifend luctus, convallis nec lacus."
+  "forgot_text" : "Insert your email to redefine your password.",
+  "titlePage1Onboarding":"Welcome!" ,
+  "discriptionPage1Onboarding": "Use our app to find out whether a news article is truthful or not." ,
+  "titlePage2Onboarding":"How it works:",
+  "discriptionPage2Onboarding": "Through the use of our homebrew AI, we can try to predict the truthfulness of a news article written in portuguese.",
+  "titlePage3Onboarding":"Almost there",
+  "discriptionPage3Onboarding": "All that you have to do now is Sign in and test your news.",
+  "buttonOnboarding":"skip",
+  "buttonOnboardingLastPage":"continue"
+  
 }
