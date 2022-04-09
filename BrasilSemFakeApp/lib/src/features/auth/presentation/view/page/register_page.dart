@@ -38,27 +38,28 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   Widget get _createAccountText => Container(
-        margin: const EdgeInsets.only(top: 40, left: 1),
+        margin: const EdgeInsets.only(top: 40, right: 155),
         child: Text(
           'create_account'.i18n(),
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: FontWeight.w700,
           ),
-          textAlign: TextAlign.left,
+          // textAlign: TextAlign.left,
         ),
       );
 
   Widget get _usernameBox => Container(
         padding: const EdgeInsets.only(
-          top: 40,
+          top: 30,
           left: 20,
-          right: 70,
+          right: 20,
         ),
         child: TextFormField(
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
               labelText: 'Username',
+              border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
           textAlign: TextAlign.center,
         ),
@@ -66,14 +67,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget get _mailBox => Container(
         padding: const EdgeInsets.only(
-          top: 40,
+          top: 20,
           left: 20,
-          right: 70,
+          right: 20,
         ),
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
               labelText: 'E-mail',
+              border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
           textAlign: TextAlign.center,
         ),
@@ -81,14 +83,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget get _passwordBox => Container(
         padding: const EdgeInsets.only(
-          top: 40,
+          top: 20,
           left: 20,
-          right: 70,
+          right: 20,
         ),
         child: TextFormField(
           keyboardType: TextInputType.visiblePassword,
           decoration: InputDecoration(
               labelText: 'Password',
+              border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
           textAlign: TextAlign.center,
         ),
@@ -96,13 +99,61 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget get _textcreateaccount => Container(
         padding: const EdgeInsets.only(
-          top: 40,
+          top: 20,
           left: 20,
           right: 70,
         ),
         child: Text(
           'create_text'.i18n(),
           textAlign: TextAlign.left,
+        ),
+      );
+
+  Widget get _dateDayBox => Container(
+        padding: const EdgeInsets.only(
+          top: 40,
+          // left: 20,
+          // right: 20,
+        ),
+        child: TextFormField(
+          keyboardType: TextInputType.visiblePassword,
+          decoration: InputDecoration(
+              labelText: 'Day',
+              border: const OutlineInputBorder(),
+              labelStyle: Theme.of(context).textTheme.subtitle1),
+          textAlign: TextAlign.center,
+        ),
+      );
+
+  Widget get _dateMonthBox => Container(
+        padding: const EdgeInsets.only(
+          top: 40,
+          // left: 20,
+          // right: 20,
+        ),
+        child: TextFormField(
+          keyboardType: TextInputType.visiblePassword,
+          decoration: InputDecoration(
+              labelText: 'Month',
+              border: const OutlineInputBorder(),
+              labelStyle: Theme.of(context).textTheme.subtitle1),
+          textAlign: TextAlign.center,
+        ),
+      );
+
+  Widget get _dateYearBox => Container(
+        padding: const EdgeInsets.only(
+          top: 40,
+          // left: 20,
+          // right: 20,
+        ),
+        child: TextFormField(
+          keyboardType: TextInputType.visiblePassword,
+          decoration: InputDecoration(
+              labelText: 'Year',
+              border: const OutlineInputBorder(),
+              labelStyle: Theme.of(context).textTheme.subtitle1),
+          textAlign: TextAlign.center,
         ),
       );
 
