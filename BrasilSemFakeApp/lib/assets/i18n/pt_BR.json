@@ -35,5 +35,9 @@
   "welcome_back": "Bem vindo de volta ! 👋",
   "login_subtext": "Estamos muito felizes em vê-lo aqui novamente !",
   "forgot_password": "Esqueceu sua senha ?",
-  "submit": "ENVIAR"
+  "submit": "ENVIAR",
+  "otpBottomButton": "Continuar",
+  "codText1": "Não recebeu o código?",
+  "codTextButton": "Toque aqui",
+  "codText2": "para enviar novamente"
 }

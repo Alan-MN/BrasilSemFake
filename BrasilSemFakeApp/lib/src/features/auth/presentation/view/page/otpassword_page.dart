@@ -37,6 +37,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
         ),
       );
   Widget get _photoContainer => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,8 +51,9 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
       );
 
   Widget get _enterCode => Container(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 80),
           Text(
@@ -62,22 +64,113 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
       ));
 
   Widget get _enterCodeText => Container(
-          child: Row(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Padding(padding: padding);
           Text(
             'enterCodeDiscription'.i18n(),
             style: const TextStyle(fontSize: 15),
-            textAlign: TextAlign.start,
           ),
         ],
       ));
-
+  Widget get _textInput => Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder())),
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder())),
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder())),
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder())),
+            ),
+          ),
+        ],
+      ));
+  Widget get _bottomButton => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        height: 60,
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(40),
+          ),
+          onPressed: () {},
+          child: Text(
+            'otpBottomButton'.i18n(),
+          ),
+        ),
+      );
+  Widget get _bottomText => Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'codText1'.i18n(),
+                textAlign: TextAlign.center,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'codTextButton'.i18n(),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Text(
+                'codText2'.i18n(),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          )
+        ],
+      ));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-      children: [_headerContainer, _photoContainer, _enterCode, _enterCodeText],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _headerContainer,
+        _photoContainer,
+        _enterCode,
+        _enterCodeText,
+        _textInput,
+        _bottomButton,
+        _bottomText
+      ],
     ));
   }
 }
