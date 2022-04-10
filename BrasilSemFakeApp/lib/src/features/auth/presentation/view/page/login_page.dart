@@ -11,6 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final _formKey = GlobalKey<FormState>();
+
   Widget get _headerContainer => Container(
         margin: const EdgeInsets.only(top: 16, right: 22, left: 12),
         child: Row(
@@ -72,6 +75,12 @@ class _LoginPageState extends State<LoginPage> {
             right: 20,
           ),
           child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your username';
+              }
+              return null;
+            },
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
                 labelText: 'Username',
@@ -87,6 +96,12 @@ class _LoginPageState extends State<LoginPage> {
           right: 20,
         ),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your password';
+            }
+            return null;
+          },
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
           decoration: InputDecoration(
@@ -106,14 +121,16 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           height: 45,
           child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _formKey.currentState!.validate();
+          },
           child: Text('login'.i18n()),
           ),
         )
       );
 
   Widget get _forgotPassword => Container(
-        margin: const EdgeInsets.only(top: 220),
+        margin: const EdgeInsets.only(top: 180),
         padding: const EdgeInsets.only(
           top: 25,
           left: 20,
@@ -134,9 +151,16 @@ class _LoginPageState extends State<LoginPage> {
             _headerContainer,
             _loginText,
             _loginSubtext,
-            _usernameBox,
-            _passwordBox,
-            _loginButton,
+            Form(
+            key: _formKey,
+              child: Column(
+                children: [
+                  _usernameBox,
+                  _passwordBox,
+                  _loginButton,
+                ],
+              )
+            ),
             _forgotPassword
           ]
         ),
