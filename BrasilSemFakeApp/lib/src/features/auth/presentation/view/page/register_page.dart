@@ -61,7 +61,6 @@ class _RegisterPageState extends State<RegisterPage> {
               labelText: 'Username',
               border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
-          textAlign: TextAlign.center,
         ),
       );
 
@@ -77,7 +76,6 @@ class _RegisterPageState extends State<RegisterPage> {
               labelText: 'E-mail',
               border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
-          textAlign: TextAlign.center,
         ),
       );
 
@@ -88,12 +86,12 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          obscureText: true,
           keyboardType: TextInputType.visiblePassword,
           decoration: InputDecoration(
               labelText: 'Password',
               border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
-          textAlign: TextAlign.center,
         ),
       );
 
@@ -106,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Text(
           'create_text'.i18n(),
           textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 15),
         ),
       );
 
@@ -253,16 +251,21 @@ class _RegisterPageState extends State<RegisterPage> {
           left: 20,
           right: 20,
         ),
-        child: ElevatedButton(
+        child: SizedBox(
+          width: double.infinity,
+          height: 45,
+          child: ElevatedButton(
           onPressed: () {},
           child: Text('create_account'.i18n()),
-        ),
+          ),
+        )
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         children: [
           _headerContainer,
           _createAccountText,
@@ -285,6 +288,7 @@ class _RegisterPageState extends State<RegisterPage> {
           _inviteRegister,
         ],
       ),
+      )
     );
   }
 }

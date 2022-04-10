@@ -53,7 +53,7 @@ class _GetStartPageState extends State<GetStartPage> {
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
               onPressed: () {
-                Modular.to.navigate('/forgot');
+                Modular.to.navigate('/login');
               },
               child: Text('login'.i18n()),
             ),
@@ -70,7 +70,7 @@ class _GetStartPageState extends State<GetStartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+      body: Column(
       children: [
         _headerContainer,
         Expanded(

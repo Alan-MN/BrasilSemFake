@@ -43,7 +43,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           top: 40,
         ),
         width: 300,
-        margin: const EdgeInsets.only(top: 16),
+        margin: const EdgeInsets.only(top: 56),
         child: Row(
           children: [
             SizedBox(
@@ -61,18 +61,26 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
   Widget get _forgot => Container(
         padding: const EdgeInsets.only(
           top: 40,
+          left: 25,
           right: 70,
         ),
-        child: Text(
-          'forgot'.i18n(),
-          textAlign: TextAlign.left,
-        ),
+        child: Row(
+          children: [
+            Text(
+              'forgot_password'.i18n(),
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700
+              )
+            ),
+          ],
+        )
       );
 
   Widget get _forgotText => Container(
         padding: const EdgeInsets.only(
-          top: 40,
-          left: 20,
+          top: 15,
           right: 70,
         ),
         child: Text(
@@ -85,7 +93,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         padding: const EdgeInsets.only(
           top: 40,
           left: 20,
-          right: 70,
+          right: 20,
         ),
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
@@ -93,34 +101,40 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
               labelText: 'E-mail',
               border: const OutlineInputBorder(),
               labelStyle: Theme.of(context).textTheme.subtitle1),
-          textAlign: TextAlign.center,
         ),
       );
 
   Widget get _bottom => Container(
-        height: 60,
-        alignment: Alignment.center,
-        child: ElevatedButton(
-          onPressed: () {
-            Modular.to.navigate('/otpassword');
-          },
-          child: Text(
-            'SUBMIT',
-          ),
+        padding: const EdgeInsets.only(
+          top: 25,
+          left: 20,
+          right: 20,
         ),
+        child: SizedBox(
+          width: double.infinity,
+          height: 45,
+          child: ElevatedButton(
+          onPressed: () {},
+          child: Text('submit'.i18n()),
+          ),
+        )
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        _headerContainer,
-        _photoContainer,
-        _forgot,
-        _forgotText,
-        _mailBox,
-        _bottom,
-      ]),
+      body:SingleChildScrollView( 
+        child: Column(
+          children: [
+            _headerContainer,
+            _photoContainer,
+            _forgot,
+            _forgotText,
+            _mailBox,
+            _bottom,
+          ]
+        ),
+      )
     );
   }
 }
