@@ -31,5 +31,9 @@
   "enterCodeDiscription": "Digite o código de recuperação que enviamos para seu e-mail",
   "create_text" : "Informe seu nome, e-mail, uma senha contendo pelomenos 8 caracteres, com uma letra Maiuscula e um caracter especial e sua data de nascimento",
   "create_account" : "CRIE UMA CONTA",
-  "term_of_use" : "Eu concordo com os Termos de Serviço e a Politica de Privacidade"
+  "term_of_use" : "Eu concordo com os Termos de Serviço e a Politica de Privacidade",
+  "otpBottomButton": "Continuar",
+  "codText1":"Não recebeu o código?",
+  "codTextButton": "Toque aqui",
+  "codText2":"para enviar novamente"
 }
