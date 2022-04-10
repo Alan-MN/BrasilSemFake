@@ -11,6 +11,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final _formKey = GlobalKey<FormState>();
+
   Widget get _headerContainer => Container(
         margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
         child: Row(
@@ -56,6 +59,12 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter username';
+            }
+            return null;
+          },
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
               labelText: 'Username',
@@ -71,6 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter e-mail';
+            }
+            return null;
+          },
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
               labelText: 'E-mail',
@@ -86,6 +101,12 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter a password';
+            }
+            return null;
+          },
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
           decoration: InputDecoration(
@@ -255,7 +276,9 @@ class _RegisterPageState extends State<RegisterPage> {
           width: double.infinity,
           height: 45,
           child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _formKey.currentState!.validate();
+          },
           child: Text('create_account'.i18n()),
           ),
         )
@@ -270,22 +293,29 @@ class _RegisterPageState extends State<RegisterPage> {
           _headerContainer,
           _createAccountText,
           _textcreateaccount,
-          _usernameBox,
-          _mailBox,
-          _passwordBox,
-          Container(
-            padding: const EdgeInsets.only(
-              top: 25,
-              left: 30,
-              right: 30,
+          Form(
+            key: _formKey,
+              child: Column(
+                children: [
+                  _usernameBox,
+                  _mailBox,
+                  _passwordBox,
+                  Container(
+              padding: const EdgeInsets.only(
+                top: 25,
+                left: 30,
+                right: 30,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [_dateDayBox, _dateMonthBox, _dateYearBox],
+              ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [_dateDayBox, _dateMonthBox, _dateYearBox],
-            ),
+            _termOfUse,
+            _inviteRegister,
+            ]
+            ) ,
           ),
-          _termOfUse,
-          _inviteRegister,
         ],
       ),
       )
