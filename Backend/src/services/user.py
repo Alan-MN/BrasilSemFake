@@ -13,7 +13,7 @@ load_dotenv()
 
 async def create_user_service(request: UserSchema, db: Session):
   digest_password = hashpw(request.password.encode('utf8'), gensalt())
-  new_user = User(username=request.username, email=request.email, password=digest_password.decode('utf8'), birthday=request.birthday, reliability=0)
+  new_user = User(username=request.username, email=request.email, password=digest_password.decode('utf8'), reliability=0)
   db.add(new_user)
   db.commit()
   db.refresh(new_user)

@@ -7,6 +7,5 @@ class User(Base):
   username = Column(String, unique=True)
   email = Column(String, unique=True)
   password = Column(String)
-  birthday = Column(String)
   reliability = Column(Integer)
   token = Column(String)
