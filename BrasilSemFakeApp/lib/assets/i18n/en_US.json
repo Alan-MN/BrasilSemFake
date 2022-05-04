@@ -37,5 +37,6 @@
   "submit": "SUBMIT",
   "codText1": "Didn't get the code?",
   "codTextButton": "Touch here",
-  "codText2": "to send it again"
+  "codText2": "to send it again",
+  "missingUser": "Please enter username"
 }

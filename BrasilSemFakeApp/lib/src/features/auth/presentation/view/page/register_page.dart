@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../auth/domain/model/login_info_verification.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  var validator = LoginInfoVerification();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -60,10 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: TextFormField(
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter username';
-            }
-            return null;
+            return validator.userVerification(value as String);
           },
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
@@ -81,10 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: TextFormField(
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter e-mail';
-            }
-            return null;
+            return validator.mailVerificatio(value as String);
           },
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -102,10 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: TextFormField(
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter a password';
-            }
-            return null;
+            return validator.passwordVerification(value as String);
           },
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
@@ -132,130 +126,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String dropdownValue = 'Day';
   String monthValue = 'Month';
   String yearValue = 'Year';
-
-  Widget get _dateDayBox => Container(
-        child: Builder(builder: (context) {
-          return DropdownButton<String>(
-            value: dropdownValue,
-            icon: const Icon(Icons.arrow_downward),
-            elevation: 16,
-            style: const TextStyle(color: Colors.orange),
-            underline: Container(
-              height: 2,
-              color: Colors.orangeAccent,
-            ),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            items: <String>[
-              'Day',
-              '01',
-              '02',
-              '03',
-              '04',
-              '05',
-              '06',
-              '07',
-              '08',
-              '09',
-              '10',
-              '11',
-              '12',
-              '13',
-              '14',
-              '15',
-              '16',
-              '17',
-              '18',
-              '19',
-              '20',
-              '21',
-              '22',
-              '23',
-              '24',
-              '25',
-              '26',
-              '27',
-              '28',
-              '29'
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          );
-        }),
-      );
-
-  Widget get _dateMonthBox => Container(
-        child: Builder(builder: (context) {
-          return DropdownButton<String>(
-            value: monthValue,
-            icon: const Icon(Icons.arrow_downward),
-            elevation: 16,
-            style: const TextStyle(color: Colors.orange),
-            underline: Container(
-              height: 2,
-              color: Colors.orangeAccent,
-            ),
-            onChanged: (String? newValue) {
-              setState(() {
-                monthValue = newValue!;
-              });
-            },
-            items: <String>[
-              'Month',
-              '01',
-              '02',
-              '03',
-              '04',
-              '05',
-              '06',
-              '07',
-              '08',
-              '09',
-              '10',
-              '11',
-              '12'
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          );
-        }),
-      );
-
-  Widget get _dateYearBox => Container(
-        child: Builder(builder: (context) {
-          return DropdownButton<String>(
-            value: yearValue,
-            icon: const Icon(Icons.arrow_downward),
-            elevation: 16,
-            style: const TextStyle(color: Colors.orange),
-            underline: Container(
-              height: 2,
-              color: Colors.orangeAccent,
-            ),
-            onChanged: (String? newValue) {
-              setState(() {
-                yearValue = newValue!;
-              });
-            },
-            items: <String>['Year', '2022', '2021', '2020', '2019']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          );
-        }),
-      );
 
   Widget get _termOfUse => Container(
         padding: const EdgeInsets.only(
@@ -308,7 +178,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [_dateDayBox, _dateMonthBox, _dateYearBox],
               ),
             ),
             _termOfUse,

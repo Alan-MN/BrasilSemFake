@@ -2,6 +2,15 @@ import 'package:localization/localization.dart';
 import 'package:email_validator/email_validator.dart';
 
 class LoginInfoVerification {
+
+  String? userVerification(String user) {
+    if (user.isEmpty) {
+      return 'missingUser'.i18n();
+    }
+
+    return null;
+  }
+
   String? passwordVerification(String password) {
     RegExp caracteresminusculos = RegExp(r"(?=.*[a-z])");
     RegExp caracteresmaiusculos = RegExp(r"(?=.*[A-Z])");

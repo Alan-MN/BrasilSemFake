@@ -39,5 +39,6 @@
   "otpBottomButton": "Continuar",
   "codText1": "Não recebeu o código?",
   "codTextButton": "Toque aqui",
-  "codText2": "para enviar novamente"
+  "codText2": "para enviar novamente",
+  "missingUser": "Porfavor insira um usuário"
 }

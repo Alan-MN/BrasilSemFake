@@ -17,13 +17,6 @@ abstract class _LoginViewModelBase with Store {
   String password = '';
 
   void login() async {
-    //TODO: Validate username
-    //TODO: Validate password
-
-    try {
-      await _usecase.login(username, password);
-    } on UnimplementedError {
-      print('Put the error message in an observable instance field.');
-    }
+    await _usecase.login(username, password);
   }
 }

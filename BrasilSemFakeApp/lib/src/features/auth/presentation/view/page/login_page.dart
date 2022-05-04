@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
+import '../../viewmodel/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  final _login = LoginViewModel();
   final _formKey = GlobalKey<FormState>();
 
   Widget get _headerContainer => Container(
@@ -123,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
           child: ElevatedButton(
           onPressed: () {
             _formKey.currentState!.validate();
+            _login.login();
           },
           child: Text('login'.i18n()),
           ),
