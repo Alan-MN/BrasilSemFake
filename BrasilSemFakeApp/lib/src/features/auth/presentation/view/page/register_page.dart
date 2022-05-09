@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../auth/domain/model/login_info_verification.dart';
+import '../widget/header.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -14,34 +15,10 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   var validator = LoginInfoVerification();
-
   final _formKey = GlobalKey<FormState>();
-
-  Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Modular.to.navigate('/get-started');
-                },
-                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
-            Row(
-              children: [
-                SvgPicture.asset('lib/assets/images/logo.svg',
-                    semanticsLabel: 'Logo image', height: 36),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: Text("app_name".i18n(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700)),
-                )
-              ],
-            )
-          ],
-        ),
-      );
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
 
   Widget get _createAccountText => Container(
         margin: const EdgeInsets.only(top: 40, right: 120),
@@ -62,6 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          controller: _usernameController,
           validator: (value) {
             return validator.userVerification(value as String);
           },
@@ -80,6 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          controller: _emailController,
           validator: (value) {
             return validator.mailVerificatio(value as String);
           },
@@ -98,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
           right: 20,
         ),
         child: TextFormField(
+          controller: _passwordController,
           validator: (value) {
             return validator.passwordVerification(value as String);
           },
@@ -123,10 +103,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
 
-  String dropdownValue = 'Day';
-  String monthValue = 'Month';
-  String yearValue = 'Year';
-
   Widget get _termOfUse => Container(
         padding: const EdgeInsets.only(
           top: 25,
@@ -147,7 +123,9 @@ class _RegisterPageState extends State<RegisterPage> {
           height: 45,
           child: ElevatedButton(
           onPressed: () {
-            _formKey.currentState!.validate();
+            if(_formKey.currentState!.validate()){
+              print("IMPLEMENTA O CADASTRO");
+            }
           },
           child: Text('create_account'.i18n()),
           ),
@@ -160,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Column(
         children: [
-          _headerContainer,
+          const HeaderWidget(),
           _createAccountText,
           _textcreateaccount,
           Form(
