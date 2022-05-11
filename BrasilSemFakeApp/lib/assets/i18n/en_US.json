@@ -38,5 +38,10 @@
   "codText1": "Didn't get the code?",
   "codTextButton": "Touch here",
   "codText2": "to send it again",
-  "missingUser": "Please enter username"
+  "missingUser": "Please enter username",
+  "otpBottomButton": "Continue",
+  "enterNewPasswordTitle": "Please enter your new password",
+  "ConfirmNewPassword":"Confirm your password",
+  "enterNewPassword":"New password",
+  "passwordChangeButton": "Submit"
 }
