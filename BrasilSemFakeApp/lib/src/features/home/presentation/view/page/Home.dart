@@ -17,17 +17,31 @@ class _HomePageState extends State<HomePage> {
  
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TextButton(
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-        ),
-        onPressed: () async{
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.remove('token');
-          Modular.to.navigate('/login');
-         },
-        child: Text('Logout'),
+      body: Container(),
+      bottomNavigationBar: BottomAppBar(
+        color: Color(0xffffa000),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: IconButton(icon: Icon(Icons.map), onPressed: () {}),
+              ),
+              Spacer(),
+              IconButton(icon: Icon(Icons.account_circle_rounded), onPressed: () {}),
+              IconButton(icon: Icon(Icons.logout), onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('token');
+                Modular.to.navigate('/login');
+              }),
+            ],
+          ),
+        )
       ),
-    );
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        );
   }
 }
