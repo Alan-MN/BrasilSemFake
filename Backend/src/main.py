@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from db import models
 from db.database_connection import engine
-from routes.user_routes import router
+from routes.user_routes import router as user_router
+from routes.recovery_routes import router as recovery_routes
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -16,4 +17,5 @@ app.add_middleware(
 
 models.User.metadata.create_all(engine)
 
-app.include_router(router)
+app.include_router(user_router)
+app.include_router(recovery_routes)
