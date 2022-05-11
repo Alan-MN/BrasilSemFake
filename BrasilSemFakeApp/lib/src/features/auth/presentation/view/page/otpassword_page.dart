@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
+import '../widget/header.dart';
 
 class OtpasswordPage extends StatefulWidget {
   const OtpasswordPage({Key? key}) : super(key: key);
@@ -11,31 +12,6 @@ class OtpasswordPage extends StatefulWidget {
 }
 
 class _OtpasswordPageState extends State<OtpasswordPage> {
-  Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Modular.to.navigate('/get-started');
-                },
-                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
-            Row(
-              children: [
-                SvgPicture.asset('lib/assets/images/logo.svg',
-                    semanticsLabel: 'Logo image', height: 36),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: Text("app_name".i18n(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700)),
-                )
-              ],
-            )
-          ],
-        ),
-      );
   Widget get _photoContainer => Container(
         margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
         child: Column(
@@ -163,7 +139,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _headerContainer,
+        const HeaderWidget(),
         _photoContainer,
         _enterCode,
         _enterCodeText,

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:basearch/src/theme.dart';
+import '../widget/header.dart';
 
 class ForgotPasswordPage2 extends StatefulWidget {
   const ForgotPasswordPage2({Key? key}) : super(key: key);
@@ -12,31 +13,6 @@ class ForgotPasswordPage2 extends StatefulWidget {
 }
 
 class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
-  Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Modular.to.navigate('/get-started');
-                },
-                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
-            Row(
-              children: [
-                SvgPicture.asset('lib/assets/images/logo.svg',
-                    semanticsLabel: 'Logo image', height: 36),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: Text("app_name".i18n(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700)),
-                )
-              ],
-            )
-          ],
-        ),
-      );
 
   Widget get _photoContainer => Container(
         padding: const EdgeInsets.only(
@@ -126,7 +102,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
       body:SingleChildScrollView( 
         child: Column(
           children: [
-            _headerContainer,
+            const HeaderWidget(),
             _photoContainer,
             _forgot,
             _forgotText,
