@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final validator = LoginInfoVerification();
 
-  _textField({String? labelText, onChanged, formValidator}){
+  _textField({String? labelText, onChanged, formValidator, required bool isPassword}){
     return Container(
       padding: const EdgeInsets.only(
         top: 25,
@@ -32,9 +32,14 @@ class _LoginPageState extends State<LoginPage> {
         validator: (value) {
           return formValidator;
         },
+        obscureText: isPassword,
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+          ),
           border: OutlineInputBorder(),
+          labelStyle: Theme.of(context).textTheme.subtitle1,
           labelText: labelText,
         ),
       )
@@ -80,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           height: 45,
           child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if(_formKey.currentState!.validate()){
-              _login.login();
+              await _login.login().then((value) => Modular.to.navigate('/home'));
             }
           },
           child: Text('login'.i18n()),
@@ -93,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget get _forgotPassword => Container(
         margin: const EdgeInsets.only(top: 180),
         padding: const EdgeInsets.only(
-          top: 25,
+          top: 10,
           left: 20,
           right: 20,
         ),
@@ -121,7 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                       return _textField(
                         labelText: "Username", 
                         onChanged: _login.setUsername,
-                        formValidator: validator.userVerification(_login.getUsername() as String)
+                        formValidator: validator.userVerification(_login.getUsername() as String),
+                        isPassword: false
                       );
                     },
                   ),
@@ -130,7 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                       return _textField(
                         labelText: "Password", 
                         onChanged: _login.setPassword,
-                        formValidator: validator.passwordVerification(_login.getPassword() as String)
+                        formValidator: validator.passwordVerification(_login.getPassword() as String),
+                        isPassword: true
                       );
                     },
                   ),

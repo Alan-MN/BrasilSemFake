@@ -7,7 +7,7 @@ import '../repository/login_interface.dart';
 class LoginUseCase {
   final repository = Modular.get<ILogin>();
 
-  Future<Token> login(String username, String password) {
-    return repository.login(User(username, password));
+  Future<Token> login(String username, String password) async {
+    return await repository.login(User(username, password));
   }
 }

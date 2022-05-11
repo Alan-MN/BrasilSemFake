@@ -1,4 +1,6 @@
+import 'package:basearch/src/features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,9 +18,33 @@ class _RegisterPageState extends State<RegisterPage> {
 
   var validator = LoginInfoVerification();
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _register = RegisterViewModel();
+
+  _textField({String? labelText, onChanged, formValidator, required bool isPassword}){
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 25,
+        left: 20,
+        right: 20,
+      ),
+      child:  TextFormField(
+        onChanged: onChanged,
+        validator: (value) {
+          return formValidator;
+        },
+        obscureText: isPassword,
+        keyboardType: TextInputType.name,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+          ),
+          border: OutlineInputBorder(),
+          labelStyle: Theme.of(context).textTheme.subtitle1,
+          labelText: labelText,
+        ),
+      )
+    );
+  }
 
   Widget get _createAccountText => Container(
         margin: const EdgeInsets.only(top: 40, right: 120),
@@ -29,64 +55,6 @@ class _RegisterPageState extends State<RegisterPage> {
             fontWeight: FontWeight.w700,
           ),
           // textAlign: TextAlign.left,
-        ),
-      );
-
-  Widget get _usernameBox => Container(
-        padding: const EdgeInsets.only(
-          top: 30,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          controller: _usernameController,
-          validator: (value) {
-            return validator.userVerification(value as String);
-          },
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(
-              labelText: 'Username',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
-        ),
-      );
-
-  Widget get _mailBox => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          controller: _emailController,
-          validator: (value) {
-            return validator.mailVerificatio(value as String);
-          },
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-              labelText: 'E-mail',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
-        ),
-      );
-
-  Widget get _passwordBox => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          controller: _passwordController,
-          validator: (value) {
-            return validator.passwordVerification(value as String);
-          },
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-          decoration: InputDecoration(
-              labelText: 'Password',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
         ),
       );
 
@@ -124,7 +92,8 @@ class _RegisterPageState extends State<RegisterPage> {
           child: ElevatedButton(
           onPressed: () {
             if(_formKey.currentState!.validate()){
-              print("IMPLEMENTA O CADASTRO");
+              _register.register();
+              Modular.to.navigate('/login');
             }
           },
           child: Text('create_account'.i18n()),
@@ -145,9 +114,36 @@ class _RegisterPageState extends State<RegisterPage> {
             key: _formKey,
               child: Column(
                 children: [
-                  _usernameBox,
-                  _mailBox,
-                  _passwordBox,
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Username", 
+                        onChanged: _register.setUsername,
+                        formValidator: validator.userVerification(_register.getUsername() as String),
+                        isPassword: false
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Email", 
+                        onChanged: _register.setEmail,
+                        formValidator: validator.mailVerificatio(_register.getEmail() as String),
+                        isPassword: false
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Password", 
+                        onChanged: _register.setPassword,
+                        formValidator: validator.passwordVerification(_register.getPassword() as String),
+                        isPassword: true
+                      );
+                    },
+                  ),
                   Container(
               padding: const EdgeInsets.only(
                 top: 25,
