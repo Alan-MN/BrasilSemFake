@@ -2,6 +2,9 @@ import 'package:basearch/src/features/auth/presentation/view/widget/header.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:dio/dio.dart';
+
+var dio = Dio();
 
 class PasswordChangePage extends StatefulWidget {
   const PasswordChangePage({Key? key}) : super(key: key);
@@ -52,7 +55,16 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(40),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            // Response response = await dio
+            //     .post('http://10.0.2.2:8000/recovery/validate', data: {
+            //   'username': usernameController.text,
+            //   'recovery_code': codeController.text
+            // });
+            // if (newPasswordConfirmationController == newPasswordController) {
+
+            // }
+          },
           child: Text(
             'passwordChangeButton'.i18n(),
           ),

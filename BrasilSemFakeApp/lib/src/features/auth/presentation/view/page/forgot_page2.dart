@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:basearch/src/theme.dart';
 import '../widget/header.dart';
+
+var dio = Dio();
 
 class ForgotPasswordPage2 extends StatefulWidget {
   const ForgotPasswordPage2({Key? key}) : super(key: key);
@@ -59,6 +62,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         ),
       );
 
+  final email_controller = TextEditingController();
   Widget get _mailBox => Container(
         padding: const EdgeInsets.only(
           top: 40,
@@ -66,6 +70,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
           right: 20,
         ),
         child: TextFormField(
+          controller: email_controller,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
               labelText: 'E-mail',
@@ -84,8 +89,13 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         width: double.infinity,
         height: 45,
         child: ElevatedButton(
-          onPressed: () {
-            Modular.to.navigate('/otpassword');
+          onPressed: () async {
+            Response response = await dio.post(
+                'http://10.0.2.2:8000/recovery/forgot',
+                data: {'email': email_controller.text});
+            if (response.data) {
+              Modular.to.navigate('/otpassword');
+            }
           },
           child: Text('submit'.i18n()),
         ),

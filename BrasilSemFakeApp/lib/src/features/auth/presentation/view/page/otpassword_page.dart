@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import '../widget/header.dart';
+
+var dio = Dio();
 
 class OtpasswordPage extends StatefulWidget {
   const OtpasswordPage({Key? key}) : super(key: key);
@@ -78,8 +81,16 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(40),
           ),
-          onPressed: () {
-            Modular.to.navigate('/passwordChange');
+          onPressed: () async {
+            Response response = await dio
+                .post('http://10.0.2.2:8000/recovery/validate', data: {
+              'username': usernameController.text,
+              'recovery_code': codeController.text
+            });
+            if (response.data) {
+              Modular.to.navigate('/passwordChange');
+              // implementar passagem do usernameNavigator.push(context, route)
+            }
           },
           child: Text(
             'otpBottomButton'.i18n(),
