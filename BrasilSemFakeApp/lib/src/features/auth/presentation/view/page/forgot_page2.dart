@@ -93,8 +93,9 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
             Response response = await dio.post(
                 'http://10.0.2.2:8000/recovery/forgot',
                 data: {'email': email_controller.text});
-            if (response.data) {
-              Modular.to.navigate('/otpassword');
+            if (response.data.isNotEmpty) {
+              Navigator.pushNamed(context, '/otpassword',
+                  arguments: response.data);
             }
           },
           child: Text('submit'.i18n()),

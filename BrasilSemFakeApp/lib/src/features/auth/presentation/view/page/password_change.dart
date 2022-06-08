@@ -1,6 +1,7 @@
 import 'package:basearch/src/features/auth/presentation/view/widget/header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 import 'package:dio/dio.dart';
 
@@ -47,7 +48,40 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
         ],
       ));
 
-  Widget get _bottomButton => Container(
+  // Widget get _bottomButton => Container(
+  //       margin: const EdgeInsets.symmetric(horizontal: 20),
+  //       height: 60,
+  //       alignment: Alignment.center,
+  //       child: ElevatedButton(
+  //         style: ElevatedButton.styleFrom(
+  //           minimumSize: const Size.fromHeight(40),
+  //         ),
+  //         onPressed: () async {
+  //           // Response response = await dio
+  //           //     .post('http://10.0.2.2:8000/recovery/validate', data: {
+  //           //   'username': usernameController.text,
+  //           //   'recovery_code': codeController.text
+  //           // });
+  //           // if (newPasswordConfirmationController == newPasswordController) {
+
+  //           // }
+  //         },
+  //         child: Text(
+  //           'passwordChangeButton'.i18n(),
+  //         ),
+  //       ),
+  //     );
+
+  @override
+  Widget build(BuildContext context) {
+    String username = ModalRoute.of(context)?.settings.arguments as String;
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Column(children: [
+      const HeaderWidget(),
+      _enterPasswordTitile,
+      _textInput,
+      Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         height: 60,
         alignment: Alignment.center,
@@ -56,30 +90,21 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
             minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () async {
-            // Response response = await dio
-            //     .post('http://10.0.2.2:8000/recovery/validate', data: {
-            //   'username': usernameController.text,
-            //   'recovery_code': codeController.text
-            // });
-            // if (newPasswordConfirmationController == newPasswordController) {
-
-            // }
+            if (newPasswordConfirmationController.text ==
+                newPasswordController.text) {
+              Response response = await dio
+                  .post('http://10.0.2.2:8000/recovery/passwordchange', data: {
+                'username': username,
+                'newPassword': newPasswordController.text
+              });
+              Modular.to.navigate('login');
+            }
           },
           child: Text(
             'passwordChangeButton'.i18n(),
           ),
         ),
-      );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Column(children: [
-      const HeaderWidget(),
-      _enterPasswordTitile,
-      _textInput,
-      _bottomButton
+      )
     ])));
   }
 }

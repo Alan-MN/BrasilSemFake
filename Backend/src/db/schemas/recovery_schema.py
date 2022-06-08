@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class forgotSchema(BaseModel):
-    username: str
+    email: str
 
 class passwordChangeSchema(BaseModel):
     username: str

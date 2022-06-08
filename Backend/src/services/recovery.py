@@ -20,9 +20,9 @@ async def forgot_password(request:forgotSchema, db: Session = Depends(get_db)):
 
         corpo = f'the new recovery code for the user "{user.username}" is: {random_code}'
         mandaEmail(user_encoded['email'],'Password recovery',corpo)
-        return True
+        return user.username
     except:
-        HTTPException(status_code=404, error="User not found")
+        HTTPException(status_code=404, detail="User not found")
 
 async def checkData(request:checkSchema, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == request.username).first()
