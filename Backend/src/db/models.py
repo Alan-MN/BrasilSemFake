@@ -9,3 +9,4 @@ class User(Base):
   password = Column(String)
   reliability = Column(Integer)
   token = Column(String)
+  recovery_code = Column(String)

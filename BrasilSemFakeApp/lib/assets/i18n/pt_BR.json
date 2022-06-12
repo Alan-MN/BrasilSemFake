@@ -40,5 +40,11 @@
   "codText1": "Não recebeu o código?",
   "codTextButton": "Toque aqui",
   "codText2": "para enviar novamente",
-  "missingUser": "Porfavor insira um usuário"
+  "missingUser": "Porfavor insira um usuário",
+  "enterNewPasswordTitle": "Por favor digite sua nova senha",
+  "ConfirmNewPassword":"Confirme a nova senha ",
+  "enterNewPassword":"Nova senha",
+  "passwordChangeButton": "Enviar"
+
+
 }
