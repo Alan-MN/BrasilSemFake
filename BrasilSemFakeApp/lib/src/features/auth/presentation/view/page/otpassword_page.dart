@@ -130,41 +130,43 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
   Widget build(BuildContext context) {
     final username = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const HeaderWidget(),
-        _photoContainer,
-        _enterCode,
-        _enterCodeText,
-        _textInput,
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          height: 60,
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(40),
-            ),
-            onPressed: () async {
-              Response response = await dio
-                  .post('http://10.0.2.2:8000/recovery/validate', data: {
-                'username': username,
-                'recovery_code': codeController.text
-              });
-              if (response.data) {
-                Navigator.pushNamed(context, '/passwordChange',
-                    arguments: username);
-                // implementar passagem do usernameNavigator.push(context, route)
-              }
-            },
-            child: Text(
-              'otpBottomButton'.i18n(),
+        body: SingleChildScrollView(
+      reverse: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const HeaderWidget(),
+          _photoContainer,
+          _enterCode,
+          _enterCodeText,
+          _textInput,
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            height: 60,
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(40),
+              ),
+              onPressed: () async {
+                Response response = await dio
+                    .post('http://10.0.2.2:8000/recovery/validate', data: {
+                  'username': username,
+                  'recovery_code': codeController.text
+                });
+                if (response.data) {
+                  Navigator.pushNamed(context, '/passwordChange',
+                      arguments: username);
+                }
+              },
+              child: Text(
+                'otpBottomButton'.i18n(),
+              ),
             ),
           ),
-        ),
-        _bottomText
-      ],
+          _bottomText
+        ],
+      ),
     ));
   }
 }

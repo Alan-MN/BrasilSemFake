@@ -1,9 +1,12 @@
-import 'package:basearch/src/features/auth/presentation/view/widget/header.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:basearch/src/features/auth/domain/model/login_info_verification.dart';
+import 'package:basearch/src/features/auth/presentation/viewmodel/login_viewmodel.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
-import 'package:dio/dio.dart';
+
+import '../widget/header.dart';
 
 var dio = Dio();
 
@@ -15,6 +18,36 @@ class PasswordChangePage extends StatefulWidget {
 }
 
 class _PasswordChangePageState extends State<PasswordChangePage> {
+  var validator = LoginInfoVerification();
+  final _formKey = GlobalKey<FormState>();
+  var _newpassword = LoginViewModel();
+  var _newpasswordconfirmation = LoginViewModel();
+
+  _textField({String? labelText, onChanged, formValidator}) {
+    return Container(
+        padding: const EdgeInsets.only(
+          top: 25,
+          left: 20,
+          right: 20,
+        ),
+        child: TextFormField(
+          onChanged: onChanged,
+          validator: (value) {
+            return formValidator;
+          },
+          obscureText: true,
+          keyboardType: TextInputType.name,
+          decoration: InputDecoration(
+            enabledBorder: const OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+            ),
+            border: OutlineInputBorder(),
+            labelStyle: Theme.of(context).textTheme.subtitle1,
+            labelText: labelText,
+          ),
+        ));
+  }
+
   Widget get _enterPasswordTitile => Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -28,83 +61,67 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
         ],
       ));
 
-  final newPasswordController = TextEditingController();
-  final newPasswordConfirmationController = TextEditingController();
-  Widget get _textInput => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextField(
-              controller: newPasswordController,
-              decoration: InputDecoration(
-                  labelText: 'enterNewPassword'.i18n(),
-                  border: OutlineInputBorder())),
-          TextField(
-              controller: newPasswordConfirmationController,
-              decoration: InputDecoration(
-                  labelText: 'ConfirmNewPassword'.i18n(),
-                  border: OutlineInputBorder())),
-        ],
-      ));
-
-  // Widget get _bottomButton => Container(
-  //       margin: const EdgeInsets.symmetric(horizontal: 20),
-  //       height: 60,
-  //       alignment: Alignment.center,
-  //       child: ElevatedButton(
-  //         style: ElevatedButton.styleFrom(
-  //           minimumSize: const Size.fromHeight(40),
-  //         ),
-  //         onPressed: () async {
-  //           // Response response = await dio
-  //           //     .post('http://10.0.2.2:8000/recovery/validate', data: {
-  //           //   'username': usernameController.text,
-  //           //   'recovery_code': codeController.text
-  //           // });
-  //           // if (newPasswordConfirmationController == newPasswordController) {
-
-  //           // }
-  //         },
-  //         child: Text(
-  //           'passwordChangeButton'.i18n(),
-  //         ),
-  //       ),
-  //     );
-
   @override
   Widget build(BuildContext context) {
     String username = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Column(children: [
-      const HeaderWidget(),
-      _enterPasswordTitile,
-      _textInput,
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        height: 60,
-        alignment: Alignment.center,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(40),
-          ),
-          onPressed: () async {
-            if (newPasswordConfirmationController.text ==
-                newPasswordController.text) {
-              Response response = await dio
-                  .post('http://10.0.2.2:8000/recovery/passwordchange', data: {
-                'username': username,
-                'newPassword': newPasswordController.text
-              });
-              Modular.to.navigate('login');
-            }
-          },
-          child: Text(
-            'passwordChangeButton'.i18n(),
-          ),
-        ),
-      )
-    ])));
+      body: SingleChildScrollView(
+        child: Column(children: [
+          const HeaderWidget(),
+          _enterPasswordTitile,
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Observer(
+                    builder: (_) {
+                      return _textField(
+                          labelText: 'enterNewPassword'.i18n(),
+                          onChanged: _newpassword.setPassword,
+                          formValidator: validator.passwordVerification(
+                              _newpassword.getPassword()));
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return _textField(
+                          labelText: 'ConfirmNewPassword'.i18n(),
+                          onChanged: _newpasswordconfirmation.setPassword,
+                          formValidator: validator.passwordVerification(
+                              _newpasswordconfirmation.getPassword()));
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    height: 60,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(40),
+                      ),
+                      onPressed: () async {
+                        if (_newpassword.getPassword() ==
+                                _newpasswordconfirmation.getPassword() &&
+                            _formKey.currentState!.validate()) {
+                          Response response = await dio.post(
+                              'http://10.0.2.2:8000/recovery/passwordchange',
+                              data: {
+                                'username': username,
+                                'newPassword': _newpassword.getPassword()
+                              });
+                          Modular.to.navigate('/login');
+                        }
+                      },
+                      child: Text(
+                        'passwordChangeButton'.i18n(),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+        ]),
+      ),
+    );
+    ;
   }
 }
