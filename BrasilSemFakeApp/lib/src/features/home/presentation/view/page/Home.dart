@@ -4,6 +4,7 @@ import 'package:basearch/src/features/home/presentation/view/page/news_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.pop(context);
         }
       },
-      child: Text('Enviar'),
+      child: Text('submit'.i18n()),
       ),
     )
   );
@@ -110,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text('Adicione uma nova notícia !', 
+                        Text('addNews'.i18n(), 
                           style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600
                           )

@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:localization/localization.dart';
+
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
 
@@ -45,7 +47,7 @@ class _NewsPageState extends State<NewsPage> {
                 Container(
                   margin: EdgeInsets.only(bottom: 12),
                   child: Text(
-                    '👋 Bem vindo !!',
+                    'welcome'.i18n(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w600
@@ -59,7 +61,7 @@ class _NewsPageState extends State<NewsPage> {
             children: [
               Expanded(child: 
                 Text(
-                  'Nessa primeira página se encontra todas as noticias que foram recentemente analizadas por nosso algoritmo, sinta-se a vontade para checar as noticias !',
+                  'cardText'.i18n(),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: TextStyle(
@@ -84,7 +86,7 @@ class _NewsPageState extends State<NewsPage> {
         children: [
           Row(
             children: [
-              Text("News",
+              Text('news'.i18n(),
                 style: TextStyle(
                   fontSize: 14, fontWeight: FontWeight.w600
                 )
@@ -126,7 +128,7 @@ class _NewsPageState extends State<NewsPage> {
                     final news = build.data!;
                     return buildNews(news);
                   }
-                    return Text("no data");
+                    return Text('empty'.i18n());
                 },
               )
             ],

@@ -57,7 +57,7 @@ class NewsWidget extends StatelessWidget {
                 children: [
                   Spacer(),
                   TextButton(onPressed: () {}, 
-                    child: Text("LER MAIS",
+                    child: Text('readRore'.i18n(),
                       style: TextStyle(fontWeight: FontWeight.w600)  
                     )
                   )

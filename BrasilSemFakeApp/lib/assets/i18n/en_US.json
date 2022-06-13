@@ -41,7 +41,15 @@
   "missingUser": "Please enter username",
   "otpBottomButton": "Continue",
   "enterNewPasswordTitle": "Please enter your new password",
-  "ConfirmNewPassword":"Confirm your password",
-  "enterNewPassword":"New password",
-  "passwordChangeButton": "Submit"
+  "ConfirmNewPassword": "Confirm your password",
+  "enterNewPassword": "New password",
+  "passwordChangeButton": "Submit",
+  "addNews": "Add new news!",
+  "cardText": "On this first page you will find all the news that were recently analyzed by our algorithm, feel free to check the news!",
+  "welcome": "👋 Welcome !!",
+  "news": "News",
+  "empty": "No data",
+  "readRore": "READ MORE",
+  "newsEmptyTitle": "Insert a title",
+  "newsEmptyBody": "Insert a body"
 }
