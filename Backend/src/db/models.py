@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 from .database_connection import Base
 
 class User(Base):
@@ -7,6 +7,19 @@ class User(Base):
   username = Column(String, unique=True)
   email = Column(String, unique=True)
   password = Column(String)
+  state = Column(String)
   reliability = Column(Integer)
   token = Column(String)
-  recovery_code = Column(String)
+
+  created_at = Column(DateTime)
+  updated_at = Column(DateTime)
+
+class Report(Base):
+  __tablename__ = 'reports'
+  id = Column(Integer, primary_key=True)
+  user_id = Column(Integer)
+  title = Column(String)
+  content = Column(String)
+
+  created_at = Column(DateTime)
+  updated_at = Column(DateTime)
