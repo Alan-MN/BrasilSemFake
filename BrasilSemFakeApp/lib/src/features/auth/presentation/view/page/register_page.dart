@@ -1,7 +1,6 @@
 import 'package:basearch/src/features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../auth/domain/model/login_info_verification.dart';
@@ -81,25 +80,25 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   Widget get _inviteRegister => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: SizedBox(
-          width: double.infinity,
-          height: 45,
-          child: ElevatedButton(
-          onPressed: () {
-            if(_formKey.currentState!.validate()){
-              _register.register();
-              Modular.to.navigate('/login');
-            }
-          },
-          child: Text('create_account'.i18n()),
-          ),
-        )
-      );
+    padding: const EdgeInsets.only(
+      top: 25,
+      left: 20,
+      right: 20,
+    ),
+    child: SizedBox(
+      width: double.infinity,
+      height: 45,
+      child: ElevatedButton(
+      onPressed: () {
+        if(_formKey.currentState!.validate()){
+          _register.register();
+          Modular.to.navigate('/login');
+        }
+      },
+      child: Text('create_account'.i18n()),
+      ),
+    )
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +153,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
             ),
-            _termOfUse,
             _inviteRegister,
             ]
             ) ,

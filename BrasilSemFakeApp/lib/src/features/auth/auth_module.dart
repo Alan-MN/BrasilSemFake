@@ -1,6 +1,9 @@
+import 'package:basearch/src/features/auth/data/repository/news_repository.dart';
 import 'package:basearch/src/features/auth/data/repository/register_repository.dart';
+import 'package:basearch/src/features/auth/domain/repository/news_interface.dart';
 import 'package:basearch/src/features/auth/domain/repository/register_interface.dart';
 import 'package:basearch/src/features/auth/domain/usecase/create_user_usecase.dart';
+import 'package:basearch/src/features/auth/domain/usecase/news_usecase.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/forgot_page2.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/get_start_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
@@ -26,6 +29,8 @@ class AuthModule extends Module {
         Bind.factory((i) => RegisterViewModel()),
         Bind.factory((i) => LoginUseCase()),
         Bind.factory((i) => CreateUserUseCase()),
+        Bind.factory((i) => NewsUseCase()),
+        Bind.factory<INews>((i) => NewsRepository()),
         Bind.factory<ILogin>((i) => LoginRepository()),
         Bind.factory<IRegister>((i) => CreateRepository()),
       ];

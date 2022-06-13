@@ -50,9 +50,12 @@ class _LoginPageState extends State<LoginPage> {
       margin: const EdgeInsets.only(top: 56, right: 22, left: 22),
       child: Row(
         children: [
-          Text('welcome_back'.i18n(), 
-            style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w700
+          Expanded(child: 
+            Text('welcome_back'.i18n(), 
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w700
+              )
             )
           )
         ]
@@ -63,12 +66,15 @@ class _LoginPageState extends State<LoginPage> {
         margin: const EdgeInsets.only(top: 15, right: 22, left: 22, bottom: 50),
         child: Row(
           children: [
-            Container(
-              child: Text('login_subtext'.i18n(), 
-              style: const TextStyle(
-                  fontSize: 15
+            Expanded(child:
+              Container(
+                child: Text('login_subtext'.i18n(), 
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    fontSize: 15
+                  )
+                ),
               )
-            ),
             )
           ]
         ),
