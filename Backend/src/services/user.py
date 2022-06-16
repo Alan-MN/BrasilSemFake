@@ -18,7 +18,6 @@ async def create_user_service(request: UserSchema, db: Session):
     username=request.username,
     email=request.email,
     password=digest_password.decode('utf8'),
-    state=request.state,
     reliability=0,
     created_at=datetime.datetime.now()
   )

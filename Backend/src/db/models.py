@@ -7,7 +7,7 @@ class User(Base):
   username = Column(String, unique=True)
   email = Column(String, unique=True)
   password = Column(String)
-  state = Column(String)
+  state = Column(String, nullable=True)
   reliability = Column(Integer)
   token = Column(String)
 
