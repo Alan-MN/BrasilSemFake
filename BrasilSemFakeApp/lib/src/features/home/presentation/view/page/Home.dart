@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'chatDetailPage.dart';
+import 'maps.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -86,7 +87,12 @@ class _HomePageState extends State<HomePage> {
                   child: IconButton(
                       splashRadius: 16,
                       icon: Icon(Icons.map, color: Colors.white),
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return MapPage();
+                        }));
+                      }),
                 ),
                 Spacer(),
                 IconButton(
