@@ -105,9 +105,10 @@ class _NewsPageState extends State<NewsPage> {
     itemCount: news.length,
     shrinkWrap: true,
     itemBuilder: (context, index) {
+      news.sort((a,b) => b.created_at.compareTo(a.created_at));
       final report = news[index]; 
       return Container(
-        child: NewsWidget(title: report.title, text: report.content)
+        child: NewsWidget(title: report.title, text: report.content, object: report)
       );
     }
   );

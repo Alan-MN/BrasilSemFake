@@ -20,6 +20,7 @@ class Report(Base):
   user_id = Column(Integer)
   title = Column(String)
   content = Column(String)
+  status = Column(String, nullable=True)
 
   created_at = Column(DateTime)
   updated_at = Column(DateTime)

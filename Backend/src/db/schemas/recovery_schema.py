@@ -12,3 +12,7 @@ class recoverySchema(BaseModel):
 
 class checkSchema(BaseModel):
     username: str
+
+class updateSchema(BaseModel):
+    report_id: int
+    status: str

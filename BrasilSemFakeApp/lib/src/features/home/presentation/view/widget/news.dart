@@ -1,3 +1,4 @@
+import 'package:basearch/src/features/auth/domain/model/news_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
@@ -6,10 +7,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class NewsWidget extends StatelessWidget {
   final String title;
   final String text;
+  final NewsRes object;
 
   const NewsWidget({
     Key, key,
-    required this.title, required this.text
+    required this.title, required this.text, required this.object, 
   }) : super(key: key);
 
   @override
@@ -56,7 +58,7 @@ class NewsWidget extends StatelessWidget {
               Row(
                 children: [
                   Spacer(),
-                  TextButton(onPressed: () {}, 
+                  TextButton(onPressed: () { Modular.to.navigate('/news-data', arguments: object);}, 
                     child: Text('readRore'.i18n(),
                       style: TextStyle(fontWeight: FontWeight.w600)  
                     )

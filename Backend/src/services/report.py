@@ -1,6 +1,7 @@
 from db.schemas.report_schema import CreateReportSchema
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, Request
+from fastapi.encoders import jsonable_encoder
 from db.models import Report, User
 import datetime
 
@@ -33,3 +34,14 @@ async def get_report_service(request: Request, report_id: str, db: Session):
     raise HTTPException(status_code=400, detail="Report not found")
 
   return report
+
+async def update_status_report_service(request: Request, db: Session):
+  report = db.query(Report).filter(Report.id == request.report_id).first()
+  report_encoded = jsonable_encoder(report)
+
+  if report_encoded:
+    report.status = request.status
+    db.commit()
+    return { "status": report.status }
+  else: 
+    raise HTTPException(status_code=400, error="Report does not exists")

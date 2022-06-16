@@ -10,6 +10,8 @@ import 'package:basearch/src/features/auth/presentation/view/page/login_page.dar
 import 'package:basearch/src/features/auth/presentation/view/page/otpassword_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/register_page.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/register_viewmodel.dart';
+import 'package:basearch/src/features/home/presentation/view/page/news_data.dart';
+import 'package:basearch/src/features/home/presentation/view/page/news_page.dart';
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -47,6 +49,7 @@ class AuthModule extends Module {
         ChildRoute('/home',
             child: (_, __) => const HomePage(), guards: [AuthGuard()]),
         ChildRoute('/passwordChange',
-            child: (_, __) => const PasswordChangePage())
+            child: (_, __) => const PasswordChangePage()),
+        ChildRoute('/news-data', child: (context, args) => NewsData(arguments: args.data)),
       ];
 }
