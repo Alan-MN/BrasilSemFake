@@ -15,26 +15,26 @@
 }
 
 \author{\IEEEauthorblockN{Gabriel A. M. de Sá}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{Ciência da Computação} \\
+\textit{IESB}\\
 Brasília, Brasil \\
 gabriel.sa@iesb.edu.br}
 \and
 \IEEEauthorblockN{Daniel L. O. Lucena}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{Ciência da Computação} \\
+\textit{IESB}\\
 Brasília, Brasil \\
 daniel.lucena@iesb.edu.br}
 \and
 \IEEEauthorblockN{Eduardo C. P. Fernandes}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{Ciência da Computação} \\
+\textit{IESB}\\
 Brasília, Brasil \\
 eduardo.fernandes@iesb.edu.br}
 \and
 \IEEEauthorblockN{Alan M. Nascimento}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{Ciência da Computação} \\
+\textit{IESB}\\
 Brasília, Brasil \\
 alan.nascimento@iesb.edu.br}
 }
@@ -42,34 +42,31 @@ alan.nascimento@iesb.edu.br}
 \maketitle
 
 \begin{abstract}
-O combate à desinformação vem se tornando um tópico de extrema importância. No contexto atual, a disseminação de notícias falsas ocorre em grande velocidade, onde redes sociais contribuem a este rápido alastramento. Muitas vezes estas notícias mimetizam a forma como notícias são tradicionalmente escritas, tornando o processo de detecção árduo e extenuante. Levando em consideração a dificuldade em categorizar tais notícias como fidedignas ou não de forma manual, esforços para a detecção automática destas estão sendo constantemente realizados. Neste artigo, será feito a investigação de quais características podem ser utilizadas ao treinar um classificador a fim de obter maior acurácia. Além disso, como a atual dificuldade em encontrar e criar datasets rotulados na língua portuguesa afeta o treinamento destes classificadores.
+O combate à desinformação vem se tornando um tópico de extrema importância. No contexto atual, a disseminação de notícias falsas ocorre em grande velocidade, onde redes sociais contribuem a este rápido alastramento. Levando em consideração a dificuldade em categorizar tais notícias como fidedignas ou não de forma manual, esforços para a detecção automática destas estão sendo constantemente realizados. Neste artigo, será feito a investigação de quais algorítmos performam melhor utilizando as métricas de acurácia e f1-score ao usarem as palavras de cada notícia como features em seu treinamento.
 \end{abstract}
 
 \begin{IEEEkeywords}
-NLP, fake news, características
+NLP, fake news, características, classificação, Svm, Naive Bayes.
 \end{IEEEkeywords}
 
-\section{Introduction}
+\section{Introdução}
 Caracterizada como notícias falsas que são compartilhadas deliberadamente com a intenção de enganar o leitor, as notícias falsas (Frequentemente chamadas de fake news) são uma grande ameaça. De acordo com um estudo feito em 2017 \cite{b1}, foi possível verificar que havia uma quantidade maior de fake news que favoreciam o canditato à presidência Doanld Trump quando comparado com as compartilhadas em favor da Hillary Clinton, outra candidata ao cargo. Este fenômeno não é exclusivo ao Estados Unidos, posto que também foi observado, ao ser feito a análise de 346 notícias falsas \cite{b2} compartilhadas durante o periodo eleitoral em 2018, que 45\% dessas eram diretamente favoráveis ao candidato Jair Bolsonaro, que eventualmente foi eleito como presidente.
 
 Ao observar este fenômeno, torna-se claro o impacto das notícias falsas na política. Enquanto este é um exemplo pertinente, suas consequências vão além deste meio, afetando até mesmo a área da saúde. Em notícias, o presidente Jair Bolsonaro defendia o uso da cloroquina e hidroxicloroquina como "tratamento precoce" para a covid-19, mesmo após a divulgação de evidências científicas que mostravam que estas não traziam benefícios aos pacientes que combatiam o vírus.
 
 Ao entender o impacto que as fake news tem em diversos setores, podemos também ver porque a sua detecção é tão importante. Porém, para combater sua propagação, primeiro há a necessidade de detecta-las. Como há um volume grande de notícias circulando constantemente, não é conveniente dar o trabalho de verificar sua veracidade a uma pessoa, consequentemente, a detecção automática usando técnicas de Natural Language Processing (NLP) e Machine Learning podem suprir esta lacuna.
 
-Para chegar ao resultado esperado, isto é, a detecção de fake news de forma automática baseada em NLP, deve ser definido quais características vão ser levadas em consideração para fazer o treinamento do algorítmo de machine learning escolhido. Em virtude disso, diferentes trabalhos que buscam o mesmo fim costumam diferir quanto a escolha de características. Tais trabalhos serão discutidos posteriormente, e também será feito um estudo com o objetivo de determinar quais conjuntos de características concluimos serem as mais pertinentes ao analisar as notícias, a fim de obter uma maior acurácia em sua detecção.
+Para chegar ao resultado esperado, isto é, a detecção de fake news de forma automática baseada em NLP, deve ser definido quais algorítmos performam melhor ao serem treinados com as palavras presentes nas notícias, isto é, qual apresentará os valores de acurácia e f1-score melhores.
 
+\section{Objetivos Gerais}
+O objetivo neste artigo é, encontrar um modo de classificar notícias em português como verdadeiras ou falsas, utilizando metodos de treinamento de maquina, como o SVM, Nayve Bayes, Bag of Words e NLP, além de técnicas como a de Lemming.
+Para isso, sera necessário tratar os texto de entrada, para padronizar e só então permitir que o algoritimos analise o mesmo.
+Tendo como resultado a acuracia que o algoritimo classificou a notícia, teremos estes dados enviados por meio de uma API. 
 
-\section{Trabalhos correlatos}
+\section{Objetivos Especificos}
+Realizar a tratação do texto passado pelo usuário, isto é, são feitas remoções de elementos considerados dispensáveis, e muitas vezes, prejudiciais para o processamento de um computador, a fim da criação de uma matriz de termo de documento (document-term matrix), e posteriormente o ato de inferir dela os dados que julgamos relevantes. Após realizado, calcular as métricas de avaliação para cada algoritmo e então concluir qual melhor se adequa para a classificação dessas notícias.
 
-Em seu artigo, Monteiro et al. \cite{b3} faz a análise das notícias utilizando como algorítmo de machine learning o support vector machine (SVM), e como características podemos citar algumas: A quantidade média de sentenças, verbos, adjetivos, advérbios, e além destes valores de quantidade, também é feita a análise de sentimentos. Para evitar algum tipo de viés, os resultados quantitativos foram analisados com base na quantidade total de tokens, posto que foi observado que as notícias verdadeiras eram, em sua maioria, bem maiores que as notícias falsas. É importante ressaltar que este artigo é o único citado neste trabalho que utiliza as notícias com língua portuguesa, além de ter realizado a criação de uma corpus com mais de 7000 notícias, todas categorizadas, na chamada fake.br corpus.
-
-Enquanto existem sites dedicados a exposição de notícias falsas (Como o \url{https://www.boatos.org}), a obtenção destas ainda se mostra um desafio, especialmente num contexto em que datasets vastos são um requisito na composição de um classificador confiável. Então, Hauch et al. \cite{b4} fala sobre como a maioria das descobertas na área foram feitas em inglês, além de trazer a tona um importante detalhe: Línguas diferentes apresentam caracteristicas diferentes que devem ser levadas em conta. Com isso, além das diferenças culturais, apenas realizar a tradução de notícias feitas em outra língua para obter uma maior quantidade de dados se mostra inviável. Hauch et al. também traz algumas características interessantes, e.g. causa, onde é feita a verificação da porcentagem de palavras que buscam atribuir causa ao que quer que esteja sendo descrito, também a certitude, como palavras do tipo "porque" e "nunca".
-
-Em sua pesquisa, Rashkin et al. \cite{b5} divide as notícias em três grupos: Sátira, Hoax (Farsas) e propaganda (Em que engana o leitor em prol de uma agenda política). Sátiras também mimetizam notícias verdadeiras, porém costumam apresentar deixas que mostram que não devem ser levadas a sério. Em virtude disso, neste trabalho, serão ignoradas as notícias de natureza satírica. Já em seus resultados, Rashkin et al. afirma que palavras podem ser usadas para exagerar algo, como superlativos e advérbios modais, são utilizadas com maior frequência em notícias falsas, já palavras que indicam valores concretos, como comparativos e números, estavam mais presentes em notícias verdadeiras.
-
-\section{Tratamento do texto}
-Para realização da extração das características de um texto, antes foi realizado uma série de etapas que buscam normalizar sua estrutura, isto é, é feita a remoção de elementos considerados dispensáveis, e muitas vezes, prejudiciais para o processamento de um computador, a fim da criação de uma matriz de termo de documento (document-term matrix), e posteriormente o ato de inferir dela os dados que julgamos relevantes.
-
+\section{Metodologia}
 \subsection{Remoção das pontuações}\label{AA}
 Inicialmente, são realizadas algumas técnicas que buscam garantir que todas as palavras não contenham caracteres especiais e afins. Primeiro, são substituidos todos os caracteres maiúsculos por minúsculos, e então é feita a remoção de todas as pontuações e dígitos do texto.
 
@@ -96,31 +93,61 @@ Finalmente, será aplicada a técnica de lemming, ou seja, as palavrãs serão r
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[scale=0.5]{figura3.png}}
-\caption{Remoção das stopwords do texto}
+\caption{Reduzindo as palavras ao seu lemming}
 \label{fig}
 \end{figure}
 
 Ao decidir se seria feito o stemming ou lemming, foi levada em conta que a prioridade é reduzir as palavras a outras que também são gramaticalmente correta, a fim de evitar problemas como stems que foram cortados demais e resultaram numa palavra que não tem mais sentido, ou palavras que apresentavam significados diferentes mas foram reduzidas ao mesmo stem. 
 
-\section{Características a serem analisadas}
+\subsection{Naive Bayes}
 
-Com o texto devidamente tratado e organizado numa document-term matrix, resta fazer a análise das características que desejamos, para posteriormente serem usadas para o treinamento de um classificador. Tomando em consideração trabalhos corretos, foram levadas em consta quais características foram comumente utilizadas \cite{b7} para então definir quais serão exploradas neste trabalho.
+Um dos algoritmos classificadores escolhido foi o Naive Bayes, em virtude de sua implementação ser prática e também boa performance mesmo com um dataset pequeno. Para chegar no featureset usado em seu treinamento, foi realizada o tratamento descrito acima em todos os textos do dataset para então definir o vocabulário usado. Com este vocabulário em mãos, é usado o modelo bag-of-words levando em conta a presença ou não de palavras do vocabulário em determinada notícia. Caso a palavra estivesse presente, esta passava a ter o valor booleano True, caso contrário, permaneceria como False. 
 
-Como esperado, a atual seleção varia em seus tipos, citando algumas: Temos quantificadores (e.g. Quantidade de caracteres), verificações da complexidade das frases (e.g. Média de palavras por frase), análise de sentimentos (e.g. \% de palavras positivas). O objetivo desta seleção é cobrir uma variedade grande de tipos, e então, combina-los a fim de encontrar quais uniões resultarão na melhor acurácia.
-
-Por fim, será feita também a investigação das consequências que a atual carência de datasets rotulados e amplos traz para o treinamento de algorítmos classificadores, especificamente na lingua portuguesa.
+Ao realizar este processo em todas as notícias, foi criado um featureset com 7200 linhas, que então foi utilizado para o treinamento. Sua implementação utilizou a biblioteca nltk do python.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[scale=0.5]{tabela1.png}}
-\caption{Tabela com características}
+\centerline{\includegraphics[scale=0.6]{naive_bayes.png}}
+\caption{Definindo features para o Naive Bayes}
 \label{fig}
 \end{figure}
+
+\subsection{Support vector machine}
+
+O outro algoritmo classificador escolhido foi o Support Vector Machine(Svm), que é um algoritmo de fácil implementação e apresenta bons resultados. Assim como para o Naive Bayes, as informações foram tratadas de acordo com os passos citados anteriormente, porém para que os dados pudessem ser utilizados foi necessário transforma-los em um document-term matrix, para isso foi utilizada o método fit\_transform() disponível com a biblioteca sklearn do python. 
+
+Após realizar tal transformação, o texto seria transformado em duas séries de informações, uma contendo de forma numérica as palavras presentes no corpo do texto e a outra sendo um número apresentando a quantidade de aparições de tais palavras. Com o dataset transformado em tais informações, ele foi usado para treinar o Modelo Svm por meio do uso da biblioteca sklearn em python.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[scale=0.6]{svm.png}}
+\caption{Definindo features para o Support Vector Machine}
+\label{fig}
+\end{figure}
+
+\section{Trabalhos correlatos}
+
+Em seu artigo, Monteiro et al. \cite{b3} faz a análise das notícias utilizando como algorítmo de machine learning o support vector machine (SVM), e como características podemos citar algumas: A quantidade média de sentenças, verbos, adjetivos, advérbios, e além destes valores de quantidade, também é feita a análise de sentimentos. Para evitar algum tipo de viés, os resultados quantitativos foram analisados com base na quantidade total de tokens, posto que foi observado que as notícias verdadeiras eram, em sua maioria, bem maiores que as notícias falsas. É importante ressaltar que este artigo é o único citado neste trabalho que utiliza as notícias na língua portuguesa, além de ter realizado a criação de uma corpus com mais de 7000 notícias, todas categorizadas, na chamada fake.br corpus.
+
+Enquanto existem sites dedicados a exposição de notícias falsas (Como o \url{https://www.boatos.org}), a obtenção destas ainda se mostra um desafio, especialmente num contexto em que datasets vastos são um requisito na composição de um classificador confiável. Então, Hauch et al. \cite{b4} fala sobre como a maioria das descobertas na área foram feitas em inglês, além de trazer a tona um importante detalhe: Línguas diferentes apresentam caracteristicas diferentes que devem ser levadas em conta. Com isso em mente, além das diferenças culturais, apenas realizar a tradução de notícias feitas em outra língua para obter uma maior quantidade de dados se mostra inviável. Hauch et al. também traz algumas características interessantes, e.g. causa, onde é feita a verificação da porcentagem de palavras que buscam atribuir causa ao que quer que esteja sendo descrito, também a certitude, como palavras do tipo "porque" e "nunca".
+
+Em sua pesquisa, Rashkin et al. \cite{b5} divide as notícias em três grupos: Sátira, Hoax (Farsas) e propaganda (Em que engana o leitor em prol de uma agenda política). Sátiras também mimetizam notícias verdadeiras, porém costumam apresentar deixas que mostram que não devem ser levadas a sério. Em virtude disso, neste trabalho, serão ignoradas as notícias de natureza satírica. Já em seus resultados, Rashkin et al. afirma que palavras podem ser usadas para exagerar algo, como superlativos e advérbios modais, são utilizadas com maior frequência em notícias falsas, já palavras que indicam valores concretos, como comparativos e números, estavam mais presentes em notícias verdadeiras.
 
 \section{Resultados esperados}
 Em virtude das limitações impostas pelo dataset, um resultado possível é o overfitting. Basicamente, a obtenção de notícias atuais se mostra um fator importante, posto que os assuntos abordados nelas podem variar dramaticamente em um curto período \cite{b7}. Levando isso em conta, e o fato de que a maior corpus publicada em português conta com apenas 7200 notícias já categorizadas, o primeiro desafio se encontra já na coleta de notícias.
 
-Além disso, utilizaremos a precisão como principal métrica de avaliação, pois no contexto atual, notícias falsas que são categorizadas erroneamente como verdadeiras acabam sendo mais prejudiciais do que o contrário. A partir disso, escolheremos as características que mais se adequam com o propósito de evitar estes falsos positivos.
+Além disso, utilizaremos o f-score como principal métrica de avaliação, pois no contexto atual, notícias falsas que são categorizadas erroneamente como verdadeiras e vice-versa são igualmente perigosas, e o f-score é o mais indicado para esse caso, já que leva em consideração tanto as avaliações falso-poisitivas e falso-negativas.
 
+\section{Resultados Obtidos}
+Ao realizar o treinamento dos algoritmos citados acima (Naive Bayes e Support Vector Machine), foi possível analisar os modelos utilizando as métricas de acurácia, precisão, recall e f1-score. tais métricas indicam: A porcentagem de classificações corretas (Acurácia), dentre as classificações positivas feitas, quantas estão corretas (Precisão), dentre as classificações positivas como resultado esperado, quantas estão corretas (Recall), e a média harmonica entre precisão e recall (F1-Score). 
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[scale=0.7]{resultados.png}}
+\caption{Métricas dos algorítmos NB e SVM}
+\label{fig}
+\end{figure}
+
+
+\section{Conclusão}
+Tendo em mente o exposto, foi possível concluir ao analisar as métricas apresentadas acima, que o algoritmo SVM apresentou resultados superiores ao do Naive Bayes, isto graças a seus valores de acurácia e f1-score maiores, mostrando adaptar-se melhor ao dataset e objetivos citados anteriormente ao utilizar as palavras das notícias como features. Logo, esse será o algoritmo usado para nossa plataforma de reconhecimento de fake news. 
 
 \begin{thebibliography}{00}
 \bibitem{b1} Allcott, Hunt, and Matthew Gentzkow. 2017. "Social Media and Fake News in the 2016 Election." Journal of Economic Perspectives, 31 (2): 211-36.
