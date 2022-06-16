@@ -5,9 +5,10 @@ import 'package:dio/dio.dart';
 
 class LoginRepository implements ILogin {
   @override
-  Future<Token> login(User user) async{
+  Future<Token> login(User user) async {
     try {
-      var response = await Dio().post('http://localhost:8000/user/login', data: {"username": user.username, "password": user.password});
+      var response = await Dio().post('http://10.0.2.2:8000/user/login',
+          data: {"username": user.username, "password": user.password});
       return Token(response.data["token"]);
     } catch (e) {
       return Token("");

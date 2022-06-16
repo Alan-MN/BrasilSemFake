@@ -20,6 +20,5 @@ async def list_reports(request: Request , db: Session = Depends(get_db)):
 async def create_report(request: Request , createReportDTO: CreateReportSchema, db: Session = Depends(get_db)):
   return await create_report_service(request, createReportDTO, db)
 
-@report_router.post('/report/update')
-async def create_report(request: updateSchema , db: Session = Depends(get_db)):
-  return await update_status_report_service(request, db)
+
+#FATO OU FAKE

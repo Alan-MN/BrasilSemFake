@@ -21,121 +21,115 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
     _getNews();
-  } 
+  }
 
   static Future<List<NewsRes>> _getNews() async {
-    var response = await Dio().get('http://localhost:8000/reports');
+    var response = await Dio().get('http://10.0.2.2:8000/reports');
     var decoded = jsonDecode(jsonEncode(response.data));
-    List<NewsRes> result = List<NewsRes>.from(decoded.map((data) => NewsRes.fromJson(data))).toList();
+    List<NewsRes> result =
+        List<NewsRes>.from(decoded.map((data) => NewsRes.fromJson(data)))
+            .toList();
     return result;
   }
 
   Widget get _banner => Container(
-    width: double.infinity,
-    height: 120,
-    decoration: new BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(3)),
-      color: Color(0xffffa000)
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(10.0),
+        width: double.infinity,
+        height: 120,
+        decoration: new BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+            color: Color(0xffffa000)),
+        child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                      margin: EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        'welcome'.i18n(),
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ))
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      'cardText'.i18n(),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ))
+                  ],
+                ),
+              ],
+            )),
+      );
+
+  Widget get _filter => Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 15),
+      decoration: new BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(3)),
+      ),
       child: Column(
         children: [
           Row(
             children: [
-              Expanded(child: 
-                Container(
-                  margin: EdgeInsets.only(bottom: 12),
-                  child: Text(
-                    'welcome'.i18n(),
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w600
-                    ),
-                  ),
-                )
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(child: 
-                Text(
-                  'cardText'.i18n(),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 4,
-                  style: TextStyle(
-                    fontSize: 12, 
-                  ),
-                )
-              )
-            ],
-          ),
-        ],
-      )
-    ),
-  );
-
-  Widget get _filter => Container(
-    width: double.infinity,
-    margin: EdgeInsets.only(top: 15),
-    decoration: new BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(3)),
-    ),
-    child: Column(
-        children: [
-          Row(
-            children: [
               Text('news'.i18n(),
-                style: TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w600
-                )
-              ),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
               Spacer(),
-              IconButton(splashRadius: 16, icon: Icon(Icons.refresh, color: Colors.white, size: 20), onPressed: () { setState(() {
-                newReports = _getNews();
-              }); }),
+              IconButton(
+                  splashRadius: 16,
+                  icon: Icon(Icons.refresh, color: Colors.white, size: 20),
+                  onPressed: () {
+                    setState(() {
+                      newReports = _getNews();
+                    });
+                  }),
             ],
           ),
         ],
-      )
-    );
+      ));
 
   Widget buildNews(List<NewsRes> news) => ListView.builder(
-    itemCount: news.length,
-    shrinkWrap: true,
-    itemBuilder: (context, index) {
-      news.sort((a,b) => b.created_at.compareTo(a.created_at));
-      final report = news[index]; 
-      return Container(
-        child: NewsWidget(title: report.title, text: report.content, object: report)
-      );
-    }
-  );
+      itemCount: news.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        news.sort((a, b) => b.created_at.compareTo(a.created_at));
+        final report = news[index];
+        return Container(
+            child: NewsWidget(
+                title: report.title, text: report.content, object: report));
+      });
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding (
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              _banner,
-              _filter,
-              FutureBuilder<List<NewsRes>>(
-                future: newReports,
-                builder: (context, build) {
-                  if(build.hasData){
-                    final news = build.data!;
-                    return buildNews(news);
-                  }
-                    return Text('empty'.i18n());
-                },
-              )
-            ],
-          )
-        ) 
-      )
-    );
+        body: SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  children: [
+                    _banner,
+                    _filter,
+                    FutureBuilder<List<NewsRes>>(
+                      future: newReports,
+                      builder: (context, build) {
+                        if (build.hasData) {
+                          final news = build.data!;
+                          return buildNews(news);
+                        }
+                        return Text('empty'.i18n());
+                      },
+                    )
+                  ],
+                ))));
   }
 }
