@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localization/localization.dart';
+import '../../../domain/model/login_info_verification.dart';
 import '../../viewmodel/login_viewmodel.dart';
+import '../widget/header.dart';
+import 'package:mobx/mobx.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,104 +18,69 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _login = LoginViewModel();
   final _formKey = GlobalKey<FormState>();
+  final validator = LoginInfoVerification();
 
-  Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22, left: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Modular.to.navigate('/get-started');
-                },
-                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
-            Row(
-              children: [
-                SvgPicture.asset('lib/assets/images/logo.svg',
-                    semanticsLabel: 'Logo image', height: 36),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: Text("app_name".i18n(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700)),
-                )
-              ],
-            )
-          ],
+  _textField({String? labelText, onChanged, formValidator, required bool isPassword}){
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 25,
+        left: 20,
+        right: 20,
+      ),
+      child:  TextFormField(
+        onChanged: onChanged,
+        validator: (value) {
+          return formValidator;
+        },
+        obscureText: isPassword,
+        keyboardType: TextInputType.name,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+          ),
+          border: OutlineInputBorder(),
+          labelStyle: Theme.of(context).textTheme.subtitle1,
+          labelText: labelText,
         ),
-      );
+      )
+    );
+  }
 
-   Widget get _loginText => Container(
-        margin: const EdgeInsets.only(top: 56, right: 22, left: 22),
-        child: Row(
-          children: [
+  Widget get _loginText => Container(
+      margin: const EdgeInsets.only(top: 56, right: 22, left: 22),
+      child: Row(
+        children: [
+          Expanded(child: 
             Text('welcome_back'.i18n(), 
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.w700
               )
             )
-          ]
-        ),
-      );
+          )
+        ]
+      ),
+    );
 
   Widget get _loginSubtext => Container(
         margin: const EdgeInsets.only(top: 15, right: 22, left: 22, bottom: 50),
         child: Row(
           children: [
-            Container(
-              child: Text('login_subtext'.i18n(), 
-              style: const TextStyle(
-                  fontSize: 15
+            Expanded(child:
+              Container(
+                child: Text('login_subtext'.i18n(), 
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    fontSize: 15
+                  )
+                ),
               )
-            ),
             )
           ]
         ),
       );
 
-  Widget get _usernameBox => Container(
-          padding: const EdgeInsets.only(
-            top: 30,
-            left: 20,
-            right: 20,
-          ),
-          child: TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your username';
-              }
-              return null;
-            },
-            keyboardType: TextInputType.name,
-            decoration: InputDecoration(
-                labelText: 'Username',
-                border: const OutlineInputBorder(),
-                labelStyle: Theme.of(context).textTheme.subtitle1),
-          ),
-        );
-
-  Widget get _passwordBox => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your password';
-            }
-            return null;
-          },
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-          decoration: InputDecoration(
-              labelText: 'Password',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
-        ),
-      );
-
+  
   Widget get _loginButton => Container(
         padding: const EdgeInsets.only(
           top: 25,
@@ -122,9 +91,10 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           height: 45,
           child: ElevatedButton(
-          onPressed: () {
-            _formKey.currentState!.validate();
-            _login.login();
+          onPressed: () async {
+            if(_formKey.currentState!.validate()){
+              await _login.login().then((value) => Modular.to.navigate('/home'));
+            }
           },
           child: Text('login'.i18n()),
           ),
@@ -134,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget get _forgotPassword => Container(
         margin: const EdgeInsets.only(top: 180),
         padding: const EdgeInsets.only(
-          top: 25,
+          top: 10,
           left: 20,
           right: 20,
         ),
@@ -150,15 +120,33 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _headerContainer,
+            const HeaderWidget(),
             _loginText,
             _loginSubtext,
             Form(
             key: _formKey,
               child: Column(
                 children: [
-                  _usernameBox,
-                  _passwordBox,
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Username", 
+                        onChanged: _login.setUsername,
+                        formValidator: validator.userVerification(_login.getUsername() as String),
+                        isPassword: false
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Password", 
+                        onChanged: _login.setPassword,
+                        formValidator: validator.passwordVerification(_login.getPassword() as String),
+                        isPassword: true
+                      );
+                    },
+                  ),
                   _loginButton,
                 ],
               )

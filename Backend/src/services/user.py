@@ -2,7 +2,7 @@ from db.schemas.user_schema import UserSchema
 from fastapi.encoders import jsonable_encoder
 from bcrypt import hashpw, gensalt, checkpw
 from sqlalchemy.orm import Session
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from dotenv import load_dotenv
 from db.models import User
 from jwt import encode
@@ -13,7 +13,14 @@ load_dotenv()
 
 async def create_user_service(request: UserSchema, db: Session):
   digest_password = hashpw(request.password.encode('utf8'), gensalt())
-  new_user = User(username=request.username, email=request.email, password=digest_password.decode('utf8'), reliability=0)
+
+  new_user = User(
+    username=request.username,
+    email=request.email,
+    password=digest_password.decode('utf8'),
+    reliability=0,
+    created_at=datetime.datetime.now()
+  )
   db.add(new_user)
   db.commit()
   db.refresh(new_user)
@@ -33,3 +40,13 @@ async def login_service(request: UserSchema, db: Session):
       raise HTTPException(status_code=400, error="Wrong password")
   else:
     raise HTTPException(status_code=400, error="User does not exist")
+
+async def list_users_service(request: Request, db: Session):
+  return db.query(User).all()
+
+async def get_user_service(request: Request, user_id: str, db: Session):
+  user = db.query(User).filter(User.id == user_id).first()
+  if not user:
+    raise HTTPException(status_code=400, detail="User not found")
+
+  return user

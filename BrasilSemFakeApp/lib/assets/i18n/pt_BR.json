@@ -40,5 +40,17 @@
   "codText1": "Não recebeu o código?",
   "codTextButton": "Toque aqui",
   "codText2": "para enviar novamente",
-  "missingUser": "Porfavor insira um usuário"
+  "missingUser": "Porfavor insira um usuário",
+  "enterNewPasswordTitle": "Por favor digite sua nova senha",
+  "ConfirmNewPassword": "Confirme a nova senha ",
+  "enterNewPassword": "Nova senha",
+  "passwordChangeButton": "Enviar",
+  "addNews": "Adicione uma nova notícia !",
+  "cardText": "Nessa primeira página se encontra todas as noticias que foram recentemente analizadas por nosso algoritmo, sinta-se a vontade para checar as noticias !",
+  "welcome": "👋 Bem vindo !!",
+  "news": "Novas",
+  "empty": "Sem dados",
+  "readRore": "LER MAIS",
+  "newsEmptyTitle": "Insira um título",
+  "newsEmptyBody": "Insira um texto"
 }

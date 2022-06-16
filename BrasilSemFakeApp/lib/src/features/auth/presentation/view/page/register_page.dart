@@ -1,8 +1,10 @@
+import 'package:basearch/src/features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../auth/domain/model/login_info_verification.dart';
+import '../widget/header.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -14,34 +16,34 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   var validator = LoginInfoVerification();
-
   final _formKey = GlobalKey<FormState>();
+  final _register = RegisterViewModel();
 
-  Widget get _headerContainer => Container(
-        margin: const EdgeInsets.only(top: 16, right: 22, left: 22),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Modular.to.navigate('/get-started');
-                },
-                icon: SvgPicture.asset('lib/assets/images/backHome.svg')),
-            Row(
-              children: [
-                SvgPicture.asset('lib/assets/images/logo.svg',
-                    semanticsLabel: 'Logo image', height: 36),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: Text("app_name".i18n(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700)),
-                )
-              ],
-            )
-          ],
+  _textField({String? labelText, onChanged, formValidator, required bool isPassword}){
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 25,
+        left: 20,
+        right: 20,
+      ),
+      child:  TextFormField(
+        onChanged: onChanged,
+        validator: (value) {
+          return formValidator;
+        },
+        obscureText: isPassword,
+        keyboardType: TextInputType.name,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+          ),
+          border: OutlineInputBorder(),
+          labelStyle: Theme.of(context).textTheme.subtitle1,
+          labelText: labelText,
         ),
-      );
+      )
+    );
+  }
 
   Widget get _createAccountText => Container(
         margin: const EdgeInsets.only(top: 40, right: 120),
@@ -52,61 +54,6 @@ class _RegisterPageState extends State<RegisterPage> {
             fontWeight: FontWeight.w700,
           ),
           // textAlign: TextAlign.left,
-        ),
-      );
-
-  Widget get _usernameBox => Container(
-        padding: const EdgeInsets.only(
-          top: 30,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          validator: (value) {
-            return validator.userVerification(value as String);
-          },
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(
-              labelText: 'Username',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
-        ),
-      );
-
-  Widget get _mailBox => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          validator: (value) {
-            return validator.mailVerificatio(value as String);
-          },
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-              labelText: 'E-mail',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
-        ),
-      );
-
-  Widget get _passwordBox => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: TextFormField(
-          validator: (value) {
-            return validator.passwordVerification(value as String);
-          },
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-          decoration: InputDecoration(
-              labelText: 'Password',
-              border: const OutlineInputBorder(),
-              labelStyle: Theme.of(context).textTheme.subtitle1),
         ),
       );
 
@@ -123,10 +70,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
 
-  String dropdownValue = 'Day';
-  String monthValue = 'Month';
-  String yearValue = 'Year';
-
   Widget get _termOfUse => Container(
         padding: const EdgeInsets.only(
           top: 25,
@@ -137,22 +80,25 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   Widget get _inviteRegister => Container(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: 20,
-          right: 20,
-        ),
-        child: SizedBox(
-          width: double.infinity,
-          height: 45,
-          child: ElevatedButton(
-          onPressed: () {
-            _formKey.currentState!.validate();
-          },
-          child: Text('create_account'.i18n()),
-          ),
-        )
-      );
+    padding: const EdgeInsets.only(
+      top: 25,
+      left: 20,
+      right: 20,
+    ),
+    child: SizedBox(
+      width: double.infinity,
+      height: 45,
+      child: ElevatedButton(
+      onPressed: () {
+        if(_formKey.currentState!.validate()){
+          _register.register();
+          Modular.to.navigate('/login');
+        }
+      },
+      child: Text('create_account'.i18n()),
+      ),
+    )
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -160,16 +106,43 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Column(
         children: [
-          _headerContainer,
+          const HeaderWidget(),
           _createAccountText,
           _textcreateaccount,
           Form(
             key: _formKey,
               child: Column(
                 children: [
-                  _usernameBox,
-                  _mailBox,
-                  _passwordBox,
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Username", 
+                        onChanged: _register.setUsername,
+                        formValidator: validator.userVerification(_register.getUsername() as String),
+                        isPassword: false
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Email", 
+                        onChanged: _register.setEmail,
+                        formValidator: validator.mailVerificatio(_register.getEmail() as String),
+                        isPassword: false
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_){
+                      return _textField(
+                        labelText: "Password", 
+                        onChanged: _register.setPassword,
+                        formValidator: validator.passwordVerification(_register.getPassword() as String),
+                        isPassword: true
+                      );
+                    },
+                  ),
                   Container(
               padding: const EdgeInsets.only(
                 top: 25,
@@ -180,7 +153,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
             ),
-            _termOfUse,
             _inviteRegister,
             ]
             ) ,

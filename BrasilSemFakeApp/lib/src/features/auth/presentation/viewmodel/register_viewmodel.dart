@@ -1,22 +1,24 @@
 import 'package:basearch/src/features/auth/domain/model/login_info_verification.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../domain/usecase/login_usecase.dart';
+import '../../domain/usecase/create_user_usecase.dart';
 
-part 'login_viewmodel.g.dart';
+part 'register_viewmodel.g.dart';
 
-class LoginViewModel = _LoginViewModelBase with _$LoginViewModel;
+class RegisterViewModel = _RegisterViewModelBase with _$RegisterViewModel;
 
-abstract class _LoginViewModelBase with Store {
+abstract class _RegisterViewModelBase with Store {
 
-  final _usecase = Modular.get<LoginUseCase>();
+  final _usecase = Modular.get<CreateUserUseCase>();
   final validator = LoginInfoVerification();
 
   @observable
   String username = '';
 
+  @observable
+  String email = '';
+  
   @observable
   String password = '';
 
@@ -38,6 +40,15 @@ abstract class _LoginViewModelBase with Store {
     return password;
   }
 
+  @action
+  void setEmail(String value) {
+    email = value;
+  }
+
+  String getEmail() {
+    return email;
+  }
+
   String? validateUsername(){
     return validator.userVerification(username);
   }
@@ -46,10 +57,12 @@ abstract class _LoginViewModelBase with Store {
     return validator.passwordVerification(password);
   }
 
-  Future<void> login() async {
-    final logData = await _usecase.login(username, password);
-    if(logData.token.isEmpty) return;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('token', logData.token);
+  String? validateEmail(){
+    return validator.mailVerificatio(email);
+  }
+
+  void register() async {
+    await _usecase.create(username, password, email);
   }
 }
+

@@ -1,5 +1,6 @@
+import '../model/token.dart';
 import '../model/user.dart';
 
 abstract class ILogin {
-  Future<User> login(User user);
+  Future<Token> login(User user);
 }
