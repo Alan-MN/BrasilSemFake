@@ -10,6 +10,7 @@ class User(Base):
   state = Column(String, nullable=True)
   reliability = Column(Integer)
   token = Column(String)
+  recovery_code = Column(String)
 
   created_at = Column(DateTime)
   updated_at = Column(DateTime)
