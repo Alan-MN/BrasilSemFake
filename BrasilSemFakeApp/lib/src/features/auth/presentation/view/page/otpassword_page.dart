@@ -64,33 +64,6 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
                   border: OutlineInputBorder())),
         ],
       ));
-<<<<<<< HEAD
-  // Widget get _bottomButton => Container(
-  //       margin: const EdgeInsets.symmetric(horizontal: 20),
-  //       height: 60,
-  //       alignment: Alignment.center,
-  //       child: ElevatedButton(
-  //         style: ElevatedButton.styleFrom(
-  //           minimumSize: const Size.fromHeight(40),
-  //         ),
-  //         onPressed: () async {
-  //           Response response = await dio
-  //               .post('https://api-brasil-sem-fake.herokuapp.com/recovery/validate', data: {
-  //             'username': username,
-  //             'recovery_code': codeController.text
-  //           });
-  //           if (response.data) {
-  //             Modular.to.navigate('/passwordChange');
-  //             // implementar passagem do usernameNavigator.push(context, route)
-  //           }
-  //         },
-  //         child: Text(
-  //           'otpBottomButton'.i18n(),
-  //         ),
-  //       ),
-  //     );
-=======
->>>>>>> 482cb9c6d989646d0ff77388b421e88aa2f5826d
   Widget get _bottomText => Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
