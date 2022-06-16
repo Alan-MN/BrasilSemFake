@@ -17,20 +17,17 @@ class OtpasswordPage extends StatefulWidget {
 class _OtpasswordPageState extends State<OtpasswordPage> {
   Widget get _photoContainer => Container(
         margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 65.0),
-            SvgPicture.asset(
-              'lib/assets/images/mailbox_recovery.svg',
-              semanticsLabel: 'Mailbox',
-            ),
-          ],
+        child: Align(
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            'lib/assets/images/mailbox_recovery.svg',
+            semanticsLabel: 'Mailbox',
+          ),
         ),
       );
 
   Widget get _enterCode => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -43,7 +40,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
       ));
 
   Widget get _enterCodeText => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -54,18 +51,12 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
         ],
       ));
 
-  // final usernameController = TextEditingController();
   final codeController = TextEditingController();
   Widget get _textInput => Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          // TextField(
-          //     controller: usernameController,
-          //     decoration: const InputDecoration(
-          //         labelText: 'insert your username',
-          //         border: OutlineInputBorder())),
           TextField(
               controller: codeController,
               decoration: const InputDecoration(
@@ -73,6 +64,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
                   border: OutlineInputBorder())),
         ],
       ));
+<<<<<<< HEAD
   // Widget get _bottomButton => Container(
   //       margin: const EdgeInsets.symmetric(horizontal: 20),
   //       height: 60,
@@ -97,34 +89,25 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
   //         ),
   //       ),
   //     );
+=======
+>>>>>>> 482cb9c6d989646d0ff77388b421e88aa2f5826d
   Widget get _bottomText => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Text(
-                'codText1'.i18n(),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {
+                Modular.to.navigate('/forgot');
+              },
+              child: Text(
+                'codTextButton'.i18n(),
                 textAlign: TextAlign.center,
               ),
-              TextButton(
-                onPressed: () {
-                  Modular.to.navigate('/forgot');
-                },
-                child: Text(
-                  'codTextButton'.i18n(),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Text(
-                'codText2'.i18n(),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          )
-        ],
-      ));
+            ),
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -136,12 +119,17 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HeaderWidget(),
+          const SizedBox(height: 65.0),
           _photoContainer,
+          const Padding(padding: EdgeInsets.all(10.0)),
           _enterCode,
+          const Padding(padding: EdgeInsets.all(5.0)),
           _enterCodeText,
+          const Padding(padding: EdgeInsets.all(20.0)),
           _textInput,
+          const Padding(padding: EdgeInsets.all(5.0)),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 60,
             alignment: Alignment.center,
             child: ElevatedButton(
@@ -164,6 +152,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
               ),
             ),
           ),
+          const Padding(padding: EdgeInsets.all(10.0)),
           _bottomText
         ],
       ),
