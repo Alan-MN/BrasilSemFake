@@ -35,7 +35,7 @@ class NewsWidget extends StatelessWidget {
                     Text(this.title,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w600
+                        fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white
                       )
                     ),
                   )
@@ -50,6 +50,7 @@ class NewsWidget extends StatelessWidget {
                       maxLines: 2,
                       style: TextStyle(
                         fontSize: 12, 
+                        color: Colors.white
                       ),
                     )
                   )

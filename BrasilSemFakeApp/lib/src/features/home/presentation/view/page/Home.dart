@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
         validator: (value) {
           return formValidator;
         },
+        style: TextStyle(color: Colors.white),
         obscureText: isPassword,
         keyboardType: TextInputType.name,
         decoration: InputDecoration(

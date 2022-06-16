@@ -24,7 +24,7 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   static Future<List<NewsRes>> _getNews() async {
-    var response = await Dio().get('http://10.0.2.2:8000/reports');
+    var response = await Dio().get('http://localhost:8000/reports');
     var decoded = jsonDecode(jsonEncode(response.data));
     List<NewsRes> result =
         List<NewsRes>.from(decoded.map((data) => NewsRes.fromJson(data)))
@@ -51,7 +51,7 @@ class _NewsPageState extends State<NewsPage> {
                         'welcome'.i18n(),
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
+                            fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
                       ),
                     ))
                   ],
@@ -65,6 +65,7 @@ class _NewsPageState extends State<NewsPage> {
                       maxLines: 4,
                       style: TextStyle(
                         fontSize: 12,
+                        color: Colors.white
                       ),
                     ))
                   ],
