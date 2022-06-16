@@ -120,15 +120,19 @@ class _NewsPageState extends State<NewsPage> {
                   children: [
                     _banner,
                     _filter,
-                    FutureBuilder<List<NewsRes>>(
-                      future: newReports,
-                      builder: (context, build) {
-                        if (build.hasData) {
-                          final news = build.data!;
-                          return buildNews(news);
-                        }
-                        return Text('empty'.i18n());
-                      },
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child:
+                      FutureBuilder<List<NewsRes>>(
+                        future: newReports,
+                        builder: (context, build) {
+                          if (build.hasData) {
+                            final news = build.data!;
+                            return buildNews(news);
+                          }
+                          return Text('empty'.i18n());
+                        },
+                      )
                     )
                   ],
                 ))));
