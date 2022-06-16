@@ -70,7 +70,6 @@ class NewsData extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: _card_color_picker(),
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: Colors.black),
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
                           margin: EdgeInsets.only(bottom: 8.0),
