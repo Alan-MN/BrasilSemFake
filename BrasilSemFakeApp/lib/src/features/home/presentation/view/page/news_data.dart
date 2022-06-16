@@ -73,7 +73,7 @@ class NewsData extends StatelessWidget {
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
                           margin: EdgeInsets.only(bottom: 8.0),
-                          child: Text(arguments.status, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)) 
+                          child: Text(arguments.status, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)) 
                         )
                       ]
                     ),

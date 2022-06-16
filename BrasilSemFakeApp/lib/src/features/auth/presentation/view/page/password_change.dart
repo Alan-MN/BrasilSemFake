@@ -104,7 +104,7 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
                                 _newpasswordconfirmation.getPassword() &&
                             _formKey.currentState!.validate()) {
                           Response response = await dio.post(
-                              'http://10.0.2.2:8000/recovery/passwordchange',
+                              'http://localhost:8000/recovery/passwordchange',
                               data: {
                                 'username': username,
                                 'newPassword': _newpassword.getPassword()

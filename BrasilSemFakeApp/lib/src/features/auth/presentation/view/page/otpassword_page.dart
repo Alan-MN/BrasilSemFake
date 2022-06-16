@@ -83,7 +83,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
   //         ),
   //         onPressed: () async {
   //           Response response = await dio
-  //               .post('http://10.0.2.2:8000/recovery/validate', data: {
+  //               .post('http://localhost:8000/recovery/validate', data: {
   //             'username': username,
   //             'recovery_code': codeController.text
   //           });
@@ -150,7 +150,7 @@ class _OtpasswordPageState extends State<OtpasswordPage> {
               ),
               onPressed: () async {
                 Response response = await dio
-                    .post('http://10.0.2.2:8000/recovery/validate', data: {
+                    .post('http://localhost:8000/recovery/validate', data: {
                   'username': username,
                   'recovery_code': codeController.text
                 });
