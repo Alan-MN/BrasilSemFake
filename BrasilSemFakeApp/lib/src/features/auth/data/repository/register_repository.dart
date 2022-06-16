@@ -6,7 +6,7 @@ class CreateRepository implements IRegister {
   @override
   Future<CreateUser> create(CreateUser user) async {
     try {
-      var response = await Dio().post('http://localhost:8000/user/create',
+      var response = await Dio().post('https://api-brasil-sem-fake.herokuapp.com/user/create',
           data: {
             "username": user.username,
             "email": user.email,

@@ -91,7 +91,7 @@ class _ForgotPassword2PageState extends State<ForgotPasswordPage2> {
         child: ElevatedButton(
           onPressed: () async {
             Response response = await dio.post(
-                'http://localhost:8000/recovery/forgot',
+                'https://api-brasil-sem-fake.herokuapp.com/recovery/forgot',
                 data: {'email': email_controller.text});
             if (response.data.isNotEmpty) {
               Navigator.pushNamed(context, '/otpassword',

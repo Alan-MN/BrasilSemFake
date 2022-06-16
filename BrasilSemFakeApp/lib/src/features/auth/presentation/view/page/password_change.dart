@@ -104,7 +104,7 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
                                 _newpasswordconfirmation.getPassword() &&
                             _formKey.currentState!.validate()) {
                           Response response = await dio.post(
-                              'http://localhost:8000/recovery/passwordchange',
+                              'https://api-brasil-sem-fake.herokuapp.com/recovery/passwordchange',
                               data: {
                                 'username': username,
                                 'newPassword': _newpassword.getPassword()

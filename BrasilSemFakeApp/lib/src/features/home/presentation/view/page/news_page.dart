@@ -24,7 +24,7 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   static Future<List<NewsRes>> _getNews() async {
-    var response = await Dio().get('http://localhost:8000/reports');
+    var response = await Dio().get('https://api-brasil-sem-fake.herokuapp.com/reports');
     var decoded = jsonDecode(jsonEncode(response.data));
     List<NewsRes> result =
         List<NewsRes>.from(decoded.map((data) => NewsRes.fromJson(data)))

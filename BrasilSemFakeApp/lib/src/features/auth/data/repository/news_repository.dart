@@ -12,7 +12,7 @@ class NewsRepository implements INews {
       final token = prefs.getString('token');
       Dio dio = Dio();
       dio.options.headers["token"] = token;
-      var response = await dio.post('http://localhost:8000/report/create',
+      var response = await dio.post('https://api-brasil-sem-fake.herokuapp.com/report/create',
           data: {"title": news.title, "content": news.text});
       return News(response.data["title"], response.data["content"]);
     } catch (e) {
