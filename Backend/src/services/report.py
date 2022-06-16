@@ -58,7 +58,6 @@ def testaNews(texto):
   data = {"newsText": texto}
   response = requests.post('https://bsf-chatbot.herokuapp.com/classifier/svm/predit', json=data)
   response_dict = json.loads(response.text)
-  import pdb;pdb.set_trace()
   if response_dict['newsType'] == False:
     newsType = "FAKE"
   else:
