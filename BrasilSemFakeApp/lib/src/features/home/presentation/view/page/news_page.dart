@@ -92,7 +92,7 @@ class _NewsPageState extends State<NewsPage> {
                 )
               ),
               Spacer(),
-              IconButton(splashRadius: 16, icon: Icon(Icons.refresh, color: Colors.white, size: 20), onPressed: () { setState(() {
+              IconButton(splashRadius: 16, icon: Icon(Icons.refresh, color: Colors.orange, size: 20), onPressed: () { setState(() {
                 newReports = _getNews();
               }); }),
             ],

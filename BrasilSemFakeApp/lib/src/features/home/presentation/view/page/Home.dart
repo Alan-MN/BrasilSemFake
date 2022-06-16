@@ -39,10 +39,12 @@ class _HomePageState extends State<HomePage> {
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
           ),
           border: OutlineInputBorder(),
-          labelStyle: Theme.of(context).textTheme.subtitle1,
+          labelStyle: TextStyle(
+            color: Colors.white,
+          ),
           labelText: labelText,
         ),
       )
@@ -113,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                         Text('addNews'.i18n(), 
                           style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600
+                            fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white
                           )
                         ),
                         Form(
